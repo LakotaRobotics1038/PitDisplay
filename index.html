@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pit Display</title>
+        <link rel="stylesheet" href="./src/styles/main.css">
+    </head>
+    <body>
+        
+        <div class="button-list">
+            <button class="open-panel" data-video="./src/videos/sponsorthankyouvideo.mp4">Sponsor Thank You Video</button>
+            <button class="open-panel" data-video="./src/videos/2023masontrailervid.mp4">2024 Mason Trailer Video</button>
+            <button class="open-panel" data-video="./src/videos/2024robotnamereveal.mp4">2024 Robot Name Reveal</button> 
+            <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
+            <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2025 Impact Video</button>
+            <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
+        </div>
+
+        <div class="panel" id="video-panel" aria-hidden="true">
+            <div class="panel-bg" data-close></div>
+            <button class="panel-back" data-close aria-label="Back">Back</button>
+            <div class="video-container">
+                <video id="modal-video" autoplay muted playsinline loop></video>
+            </div>
+        </div>
+
+        <script src="./src/js/main.js"></script>
+    </body>
+</html>
