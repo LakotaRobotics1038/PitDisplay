@@ -1,6 +1,81 @@
 const buttons = document.querySelectorAll(".open-panel");
 const panel = document.getElementById("video-panel");
 const videoEl = document.getElementById("modal-video");
+const sectionBtns = document.querySelectorAll(".section-btn");
+const sections = document.querySelectorAll(".section");
+
+// Section order for determining slide direction
+const sectionOrder = ['videos', 'information', 'models'];
+
+// Section Navigation
+const switchSection = (sectionName) => {
+	const currentSection = document.querySelector(".section.active");
+	const targetSection = document.getElementById(`${sectionName}-section`);
+	const targetBtn = document.querySelector(`[data-section="${sectionName}"]`);
+	
+	// Don't switch if already on this section
+	if (currentSection === targetSection) return;
+	
+	// Update body data attribute for background parallax
+	document.body.setAttribute('data-section', sectionName);
+	
+	// Determine direction based on section order
+	const currentIndex = currentSection ? sectionOrder.indexOf(currentSection.id.replace('-section', '')) : 0;
+	const targetIndex = sectionOrder.indexOf(sectionName);
+	const movingForward = targetIndex > currentIndex;
+	
+	// Clean up all sections that aren't current or target - reset them completely with no transition
+	sections.forEach(section => {
+		if (section !== currentSection && section !== targetSection) {
+			section.classList.add('no-transition');
+			section.classList.remove('active', 'from-left', 'from-right', 'slide-left', 'slide-right');
+			// Force reflow
+			void section.offsetWidth;
+			section.classList.remove('no-transition');
+		}
+	});
+	
+	// Slide out current section
+	if (currentSection) {
+		const slideOutClass = movingForward ? 'slide-left' : 'slide-right';
+		currentSection.classList.remove('active', 'from-left', 'from-right', 'slide-left', 'slide-right');
+		currentSection.classList.add(slideOutClass);
+	}
+	
+	// Update button states
+	sectionBtns.forEach(btn => {
+		btn.classList.remove("active");
+	});
+	if (targetBtn) targetBtn.classList.add("active");
+	
+	// Position target section instantly (no transition), then animate
+	if (targetSection) {
+		const fromClass = movingForward ? 'from-right' : 'from-left';
+		
+		// Clear all classes and disable transitions
+		targetSection.classList.remove('active', 'from-left', 'from-right', 'slide-left', 'slide-right');
+		targetSection.classList.add('no-transition', fromClass);
+		
+		// Force reflow to apply instant positioning
+		void targetSection.offsetWidth;
+		
+		// Re-enable transitions and animate to center
+		targetSection.classList.remove('no-transition');
+		
+		// Use requestAnimationFrame to ensure transition is re-enabled before animation
+		requestAnimationFrame(() => {
+			targetSection.classList.remove('from-left', 'from-right');
+			targetSection.classList.add("active");
+		});
+	}
+};
+
+sectionBtns.forEach(btn => {
+	btn.addEventListener("click", () => {
+		const sectionName = btn.getAttribute("data-section");
+		switchSection(sectionName);
+	});
+});
 
 const setVideoSource = (src) => {
 	if (!videoEl) return;
@@ -39,8 +114,8 @@ const animateContainerFromButton = (button) => {
 				{ transform: "translate(0, 0) scale(1)", opacity: 1 }
 			],
 			{
-				duration: 520,
-				easing: "cubic-bezier(0.31, 1.27, 0.00, 1.00)",
+				duration: 600,
+				easing: "cubic-bezier(0.19, 1, 0.22, 1)",
 				fill: "both"
 			}
 		);
