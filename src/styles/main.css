@@ -1,0 +1,117 @@
+html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #7c51a1, #0095da);
+    background-image: url('../img/bg.jpg');
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	touch-action: manipulation;
+}
+
+body.modal-open {
+	overflow: hidden;
+}
+
+.button-list {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	padding: 24px;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+}
+
+.button-list button {
+	background: rgba(255, 255, 255, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	color: #fff;
+	padding: 20px 30px;
+	border-radius: 100px;
+	cursor: pointer;
+	backdrop-filter: blur(6px);
+	transition: transform 0.2s ease, background 0.2s ease;
+	min-height: 48px;
+	min-width: 200px;
+    font-size: 25px;
+	/* font-size: 1.05rem; */
+}
+
+.button-list button:hover {
+	transform: scale(1.05);
+	background: rgba(255, 255, 255, 0.25);
+}
+
+.panel {
+	position: fixed;
+	inset: 0;
+	display: none;
+	opacity: 0;
+	z-index: 10;
+	align-items: center;
+	justify-content: center;
+}
+
+.panel.is-open {
+	display: block;
+	opacity: 1;
+	display: flex;
+}
+
+.panel-bg {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(20px);
+	will-change: opacity;
+}
+
+.panel-back {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	z-index: 2;
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: 999px;
+	padding: 8px 14px;
+	min-height: 44px;
+	min-width: 64px;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.video-container {
+	position: relative;
+	z-index: 1;
+	width: min(94vw, 1000px);
+	height: auto;
+	display: inline-block;
+	margin: 0;
+	background: #000;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+	will-change: transform, opacity;
+}
+
+.video-container video {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	display: block;
+	transform-origin: center;
+}
+
+@keyframes video-zoom {
+	from { transform: scale(1); }
+	to { transform: scale(1.08); }
+}
+
