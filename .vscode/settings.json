@@ -1,0 +1,7 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "editor.detectIndentation": false,
+}
