@@ -154,13 +154,13 @@ body.modal-open {
 }
 
 .button-list button {
-	background: rgba(255, 255, 255, 0.15);
+	background: rgba(255, 255, 255, 0.25);
 	border: 1px solid rgba(255, 255, 255, 0.35);
 	color: #fff;
 	padding: 20px 30px;
 	border-radius: 100px;
 	cursor: pointer;
-	backdrop-filter: blur(6px);
+	backdrop-filter: blur(10px);
 	transition: transform 0.2s ease, background 0.2s ease;
 	min-height: 48px;
 	min-width: 200px;
