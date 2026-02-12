@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pit Display</title>
-        <link rel="stylesheet" href="./src/styles/main.css">
-    </head>
-    <body>
 
-        <div class="section-nav">
-            <button class="section-btn active" data-section="videos">Videos</button>
-            <button class="section-btn" data-section="information">Information</button>
-            <button class="section-btn" data-section="models">3D Models</button>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pit Display</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+</head>
 
-        <div class="sections-container">
-            <div class="section active" id="videos-section">
-                <div class="button-list">
-                    <button class="open-panel" data-video="./src/videos/sponsorthankyouvideo.mp4">Sponsor Thank You Video</button>
-                    <button class="open-panel" data-video="./src/videos/2023masontrailervid.mp4">2024 Mason Trailer Video</button>
-                    <button class="open-panel" data-video="./src/videos/2024robotnamereveal.mp4">2024 Robot Name Reveal</button>
-                    <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
-                    <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2025 Impact Video</button>
-                    <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
-                </div>
-            </div>
+<body>
 
-            <div class="section" id="information-section">
-                <div class="button-list">
-                    <button class="info-btn">Team History</button>
-                    <button class="info-btn">Robot Specifications</button>
-                    <button class="info-btn">Awards & Achievements</button>
-                    <button class="info-btn">About Our Team</button>
-                </div>
-            </div>
+  <div class="section-nav">
+    <button class="section-btn active" data-section="videos">Videos</button>
+    <button class="section-btn" data-section="information">Information</button>
+    <button class="section-btn" data-section="models">3D Models</button>
+  </div>
 
-            <div class="section" id="models-section">
-                <div class="button-list">
-                    <button class="model-btn">Robot Model</button>
-                    <button class="model-btn">Mechanism Demo</button>
-                    <button class="model-btn">CAD Design</button>
-                </div>
-            </div>
-        </div>
+  <div class="sections-container">
+    <div class="section active" id="videos-section">
+      <div class="button-list">
+        <button class="open-panel" data-video="./src/videos/sponsorthankyouvideo.mp4">Sponsor Thank You Video</button>
+        <button class="open-panel" data-video="./src/videos/2023masontrailervid.mp4">2024 Mason Trailer Video</button>
+        <button class="open-panel" data-video="./src/videos/2024robotnamereveal.mp4">2024 Robot Name Reveal</button>
+        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
+        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2025 Impact Video</button>
+        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
+      </div>
+    </div>
 
-        <div class="panel" id="video-panel" aria-hidden="true">
-            <div class="panel-bg" data-close></div>
-            <button class="panel-back" data-close aria-label="Back">Back</button>
-            <div class="video-container">
-                <video id="modal-video" autoplay muted playsinline loop></video>
-            </div>
-        </div>
+    <div class="section" id="information-section">
+      <div class="button-list">
+        <button class="info-btn">Team History</button>
+        <button class="info-btn">Robot Specifications</button>
+        <button class="info-btn">Awards & Achievements</button>
+        <button class="info-btn">About Our Team</button>
+      </div>
+    </div>
 
-        <script src="./src/js/main.js"></script>
-    </body>
+    <div class="section" id="models-section">
+      <div class="button-list">
+        <button class="model-btn">Robot Model</button>
+        <button class="model-btn">Mechanism Demo</button>
+        <button class="model-btn">CAD Design</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="video-panel" aria-hidden="true">
+    <div class="panel-bg" data-close></div>
+    <button class="panel-back" data-close aria-label="Back">Back</button>
+    <div class="video-container">
+      <video id="modal-video" autoplay muted playsinline loop></video>
+    </div>
+  </div>
+
+  <script src="./src/js/main.js"></script>
+</body>
+
 </html>
