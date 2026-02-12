@@ -5,7 +5,7 @@ const sectionBtns = document.querySelectorAll(".section-btn");
 const sections = document.querySelectorAll(".section");
 
 // Section order for determining slide direction
-const sectionOrder = ['videos', 'information', 'models'];
+const sectionOrder = ['about', 'robot', 'impact', 'sponsors'];
 
 // Section Navigation
 const switchSection = (sectionName) => {
