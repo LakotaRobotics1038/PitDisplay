@@ -12,18 +12,21 @@ const switchSection = (sectionName) => {
 	const currentSection = document.querySelector(".section.active");
 	const targetSection = document.getElementById(`${sectionName}-section`);
 	const targetBtn = document.querySelector(`[data-section="${sectionName}"]`);
-	
+
 	// Don't switch if already on this section
 	if (currentSection === targetSection) return;
-	
+
+	// Update URL hash
+	window.location.hash = sectionName;
+
 	// Update body data attribute for background parallax
 	document.body.setAttribute('data-section', sectionName);
-	
+
 	// Determine direction based on section order
 	const currentIndex = currentSection ? sectionOrder.indexOf(currentSection.id.replace('-section', '')) : 0;
 	const targetIndex = sectionOrder.indexOf(sectionName);
 	const movingForward = targetIndex > currentIndex;
-	
+
 	// Clean up all sections that aren't current or target - reset them completely with no transition
 	sections.forEach(section => {
 		if (section !== currentSection && section !== targetSection) {
@@ -34,34 +37,34 @@ const switchSection = (sectionName) => {
 			section.classList.remove('no-transition');
 		}
 	});
-	
+
 	// Slide out current section
 	if (currentSection) {
 		const slideOutClass = movingForward ? 'slide-left' : 'slide-right';
 		currentSection.classList.remove('active', 'from-left', 'from-right', 'slide-left', 'slide-right');
 		currentSection.classList.add(slideOutClass);
 	}
-	
+
 	// Update button states
 	sectionBtns.forEach(btn => {
 		btn.classList.remove("active");
 	});
 	if (targetBtn) targetBtn.classList.add("active");
-	
+
 	// Position target section instantly (no transition), then animate
 	if (targetSection) {
 		const fromClass = movingForward ? 'from-right' : 'from-left';
-		
+
 		// Clear all classes and disable transitions
 		targetSection.classList.remove('active', 'from-left', 'from-right', 'slide-left', 'slide-right');
 		targetSection.classList.add('no-transition', fromClass);
-		
+
 		// Force reflow to apply instant positioning
 		void targetSection.offsetWidth;
-		
+
 		// Re-enable transitions and animate to center
 		targetSection.classList.remove('no-transition');
-		
+
 		// Use requestAnimationFrame to ensure transition is re-enabled before animation
 		requestAnimationFrame(() => {
 			targetSection.classList.remove('from-left', 'from-right');
@@ -69,6 +72,25 @@ const switchSection = (sectionName) => {
 		});
 	}
 };
+
+// Handle hash changes (browser back/forward and direct hash navigation)
+const handleHashChange = () => {
+	const hash = window.location.hash.slice(1); // Remove the '#' character
+	if (hash && sectionOrder.includes(hash)) {
+		switchSection(hash);
+	}
+};
+
+// Listen for hash changes
+window.addEventListener('hashchange', handleHashChange);
+
+// Initialize on page load
+window.addEventListener('load', () => {
+	const hash = window.location.hash.slice(1);
+	if (hash && sectionOrder.includes(hash)) {
+		switchSection(hash);
+	}
+});
 
 sectionBtns.forEach(btn => {
 	btn.addEventListener("click", () => {
