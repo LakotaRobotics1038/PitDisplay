@@ -6,17 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1038 Pit Display</title>
   <link rel="stylesheet" href="./src/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="./src/lib/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./src/styles/bootstrap-overrides.css">
   <link rel="stylesheet" href="./src/styles/main.css">
-  <link rel="stylesheet" href="./src/styles/modal.css">
+  <link rel="stylesheet" href="./src/styles/video-modal.css">
+  <link rel="stylesheet" href="./src/styles/social-modal.css">
   <link rel="stylesheet" href="./src/styles/home.css">
   <link rel="stylesheet" href="./src/styles/our-team.css">
   <link rel="stylesheet" href="./src/styles/our-robot.css">
 </head>
 
 <body>
-
-  <img class="header-logo img-shadow" src="./src/img/1038-LOGO-wings_WHITE.png" alt="1038 Wings Logo">
+  <header>
+    <img class="header-logo img-shadow" src="./src/img/1038-LOGO-wings_WHITE.png" alt="1038 Wings Logo">
+    <div class="social-icons">
+      <button class="social-icon-btn" data-social="facebook" data-handle="@LakotaRobotics">
+        <i class="bi bi-facebook"></i>
+      </button>
+      <button class="social-icon-btn" data-social="instagram" data-handle="@LakotaRobotics">
+        <i class="bi bi-instagram"></i>
+      </button>
+      <button class="social-icon-btn" data-social="linkedin" data-handle="@lakota-robotics-llc">
+        <i class="bi bi-linkedin"></i>
+      </button>
+      <button class="social-icon-btn" data-social="youtube" data-handle="@LakotaRobotics">
+        <i class="bi bi-youtube"></i>
+      </button>
+      <button class="social-icon-btn" data-social="tiktok" data-handle="@LakotaRobotics">
+        <i class="bi bi-tiktok"></i>
+      </button>
+      <button class="social-icon-btn" data-social="twitter-x" data-handle="@LakotaRobotics">
+        <i class="bi bi-twitter-x"></i>
+      </button>
+    </div>
+  </header>
 
   <div class="section-nav">
     <button class="section-btn active" data-section="home">Home</button>
@@ -145,18 +168,22 @@
               <h4>2nd-4th Grade</h4>
               <div class="row">
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_31429_wt.svg" alt="FLL Explore Team 31429" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_31429_wt.svg" alt="FLL Explore Team 31429"
+                    class="w-100 img-shadow" />
                 </div>
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_31640_wt.svg" alt="FLL Explore Team 31640" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_31640_wt.svg" alt="FLL Explore Team 31640"
+                    class="w-100 img-shadow" />
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_33970_wt.svg" alt="FLL Explore Team 33970" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_33970_wt.svg" alt="FLL Explore Team 33970"
+                    class="w-100 img-shadow" />
                 </div>
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_34071_wt.svg" alt="FLL Explore Team 34071" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_34071_wt.svg" alt="FLL Explore Team 34071"
+                    class="w-100 img-shadow" />
                 </div>
               </div>
             </div>
@@ -165,18 +192,22 @@
               <h4>4th-6th Grade</h4>
               <div class="row">
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_67066_wt.svg" alt="FLL Explore Team 67066" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_67066_wt.svg" alt="FLL Explore Team 67066"
+                    class="w-100 img-shadow" />
                 </div>
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_70840_wt.svg" alt="FLL Explore Team 70840" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_70840_wt.svg" alt="FLL Explore Team 70840"
+                    class="w-100 img-shadow" />
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_71226_wt.svg" alt="FLL Explore Team 71226" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_71226_wt.svg" alt="FLL Explore Team 71226"
+                    class="w-100 img-shadow" />
                 </div>
                 <div class="col">
-                  <img src="./src/img/fll/team-logos/FLL_71227_wt.svg" alt="FLL Explore Team 71227" class="w-100 img-shadow" />
+                  <img src="./src/img/fll/team-logos/FLL_71227_wt.svg" alt="FLL Explore Team 71227"
+                    class="w-100 img-shadow" />
                 </div>
               </div>
             </div>
@@ -211,24 +242,32 @@
     </div>
 
     <div class="section" id="community-section">
-        <img src="./src/img/community/Community Header.png" alt="Community Header" class="section-header" />
-        <div class="section-body">
-          <p>Community Demo&apos;s, Sponsor Demo&apos;s, UCBMA Food truck rally and more...</p>
-          <p>Everyone has a place at Lakota Robotics, from sponsors and mentors to students. Whether you’d like to volunteer, become a corporate partner, or attend one of our fundraising events, your involvement helps us continue to make STEM education accessible to all.</p>
-        </div>
-        <div class="section-footer">
-          <img src="./src/img/community/Community Footer 1.png" alt="Community Footer" />
-          <img src="./src/img/community/Community Footer 2.png" alt="Community Footer" />
-        </div>
+      <img src="./src/img/community/Community Header.png" alt="Community Header" class="section-header" />
+      <div class="section-body">
+        <p>Community Demo&apos;s, Sponsor Demo&apos;s, UCBMA Food truck rally and more...</p>
+        <p>Everyone has a place at Lakota Robotics, from sponsors and mentors to students. Whether you’d like to
+          volunteer, become a corporate partner, or attend one of our fundraising events, your involvement helps us
+          continue to make STEM education accessible to all.</p>
+      </div>
+      <div class="section-footer">
+        <img src="./src/img/community/Community Footer 1.png" alt="Community Footer" />
+        <img src="./src/img/community/Community Footer 2.png" alt="Community Footer" />
+      </div>
     </div>
 
     <div class="section" id="pgsc-section">
       <img src="./src/img/pgsc/PGSC Header.png" alt="PGSC Header" class="section-header" />
       <div class="section-body">
         <img src="./src/img/pgsc/PGSC_logo.svg" alt="PGSC Logo" class="img-shadow" />
-        <p>Paul George, a founding mentor of Lakota Robotics, will always be remembered as a champion for education, innovation, and mentorship. His belief in every student inspired countless young minds to explore STEM and take bold risks.</p>
-        <p>Alongside Lead Mentor Jimmy Nichols, Paul dreamed of a permanent home for Lakota Robotics—one that would make STEM accessible to all. He often said, “Who are we to decide who deserves to be inspired?” a belief that guides our commitment to keep participation free.</p>
-        <p>When Paul passed from cancer in 2020, he left the funds to make that dream a reality. The Paul George STEM Center stands as a lasting tribute to his vision, generosity, and the motto behind every robot we build: WWPGD.</p>
+        <p>Paul George, a founding mentor of Lakota Robotics, will always be remembered as a champion for education,
+          innovation, and mentorship. His belief in every student inspired countless young minds to explore STEM and
+          take bold risks.</p>
+        <p>Alongside Lead Mentor Jimmy Nichols, Paul dreamed of a permanent home for Lakota Robotics—one that would make
+          STEM accessible to all. He often said, “Who are we to decide who deserves to be inspired?” a belief that
+          guides our commitment to keep participation free.</p>
+        <p>When Paul passed from cancer in 2020, he left the funds to make that dream a reality. The Paul George STEM
+          Center stands as a lasting tribute to his vision, generosity, and the motto behind every robot we build:
+          WWPGD.</p>
         <img src="./src/img/pgsc/PGSC WWPGD.png" alt="WWPGD: What Would Paul George Do?" class="img-shadow" />
       </div>
     </div>
@@ -259,9 +298,32 @@
     </div>
   </div>
 
+  <div class="modal fade" id="social-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="social-modal-bar mb-3 pe-0">
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill social-modal-back"
+              data-bs-dismiss="modal" aria-label="Back">Back</button>
+          </div>
+          <div class="social-container">
+            <div class="p-4 text-center">
+              <h2 class="mb-3" id="social-modal-title">Follow Us</h2>
+              <div id="social-qr-container" class="mb-3">
+                <img id="social-qr-code" src="" alt="QR Code">
+              </div>
+              <h3 id="social-modal-handle"></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./src/lib/bootstrap.bundle.min.js"></script>
   <script src="./src/js/hash-routing.js"></script>
   <script src="./src/js/video-modal.js"></script>
+  <script src="./src/js/social-modal.js"></script>
   <script src="./src/js/main.js"></script>
 </body>
 
