@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="./src/lib/bootstrap.min.css">
   <link rel="stylesheet" href="./src/styles/bootstrap-overrides.css">
   <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="stylesheet" href="./src/styles/modal.css">
   <link rel="stylesheet" href="./src/styles/home.css">
   <link rel="stylesheet" href="./src/styles/our-team.css">
   <link rel="stylesheet" href="./src/styles/our-robot.css">
+  <link rel="stylesheet" href="./src/styles/fll.css">
 </head>
 
 <body>
@@ -29,7 +31,7 @@
 
   <div class="sections-container">
     <div class="section active" id="home-section">
-      <img class="header-img" src="./src/img/home/Home Header.png" />
+      <img class="section-header" src="./src/img/home/Home Header.png" />
       <div class="section-body">
         <p>Lakota Robotics: Inspiring Tomorrow&apos;s Innovators. Lakota Robotics is a community-based STEM education
           program located at the Paul George STEM Center in Liberty Township, Ohio. We proudly represent students from
@@ -114,9 +116,14 @@
         </div>
 
         <div class="team-text">
-          <p>Lakota Robotics empowers students to develop skills in coding, CAD, mechanical design, project management, and leadership—skills that prepare them for success in college, careers, and life. Our program fosters collaboration between students, schools, mentors, and local businesses, creating a true community of innovation and opportunity.</p>
-          <p>Lakota Robotics follows the internationally recognized FIRST® Robotics model, offering programs that inspire curiosity, problem-solving, and teamwork.</p>
-          <p>FIRST Robotics Competition (FRC) - For students in grades 7-12, where teams design, build, and program full-scale robots to compete at regional and national events.</p>
+          <p>Lakota Robotics empowers students to develop skills in coding, CAD, mechanical design, project management,
+            and leadership—skills that prepare them for success in college, careers, and life. Our program fosters
+            collaboration between students, schools, mentors, and local businesses, creating a true community of
+            innovation and opportunity.</p>
+          <p>Lakota Robotics follows the internationally recognized FIRST® Robotics model, offering programs that
+            inspire curiosity, problem-solving, and teamwork.</p>
+          <p>FIRST Robotics Competition (FRC) - For students in grades 7-12, where teams design, build, and program
+            full-scale robots to compete at regional and national events.</p>
         </div>
 
       </div>
@@ -126,7 +133,66 @@
       </div>
     </div>
 
-    <div class="section" id="fll-section"></div>
+    <div class="section" id="fll-section">
+      <img src="./src/img/fll/FLL Header.png" alt="FLL Header" class="section-header" />
+      <div class="section-body">
+        <img src="./src/img/fll/LR_FLL_white_logo.svg" alt="FLL Body" class="w-50 align-self-center" />
+        <div>
+          <h2 class="text-center">8 FLL Teams</h2>
+          <div class="row text-center">
+            <div class="col">
+              <h3>Explore Teams</h3>
+              <h4>2nd-4th Grade</h4>
+              <div class="row">
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_31429_wt.svg" alt="FLL Explore Team 31429" class="w-100" />
+                </div>
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_31640_wt.svg" alt="FLL Explore Team 31640" class="w-100" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_33970_wt.svg" alt="FLL Explore Team 33970" class="w-100" />
+                </div>
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_34071_wt.svg" alt="FLL Explore Team 34071" class="w-100" />
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h3>Challenge Teams</h3>
+              <h4>4th-6th Grade</h4>
+              <div class="row">
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_67066_wt.svg" alt="FLL Explore Team 67066" class="w-100" />
+                </div>
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_70840_wt.svg" alt="FLL Explore Team 70840" class="w-100" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_71226_wt.svg" alt="FLL Explore Team 71226" class="w-100" />
+                </div>
+                <div class="col">
+                  <img src="./src/img/fll/team-logos/FLL_71227_wt.svg" alt="FLL Explore Team 71227" class="w-100" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>Lakota Robotics follows the internationally recognized FIRST® Robotics model, offering programs that inspire
+          curiosity, problem-solving, and teamwork.</p>
+        <p>FIRST LEGO League (FLL) - For students in grades 4-6, focused on creativity, design, and collaboration.</p>
+        <p>Our FLL program acts as a feeder program for our FRC team, helping students grow from curious beginners to
+          confident builders, programmers, and leaders.</p>
+        <h2 class="text-center">FLL Tournament since 2006 (20 years)</h2>
+      </div>
+      <div class="section-footer">
+        <img src="./src/img/fll/FLL Footer.png" alt="FLL Footer" />
+      </div>
+    </div>
 
     <div class="section" id="workshops-section"></div>
 
@@ -134,8 +200,10 @@
 
     <div class="section" id="sponsors-section">
       <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
-        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100" data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
-        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100" data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
+        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
+          data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
+        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
+          data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
       </div>
     </div>
   </div>
@@ -145,7 +213,8 @@
       <div class="modal-content">
         <div class="modal-body p-0">
           <div class="video-modal-bar">
-            <button type="button" class="btn btn-outline-light btn-lg rounded-pill video-modal-back" data-bs-dismiss="modal" aria-label="Back">Back</button>
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill video-modal-back"
+              data-bs-dismiss="modal" aria-label="Back">Back</button>
           </div>
           <div class="video-container">
             <video id="modal-video" autoplay muted playsinline loop></video>

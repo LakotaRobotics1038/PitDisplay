@@ -1,3 +1,9 @@
+/* Global Styles (overrides an element directly */
+* {
+	font-family: 'Sora', sans-serif;
+	box-sizing: border-box;
+}
+
 html {
     margin: 0;
 }
@@ -5,6 +11,7 @@ html {
 body {
 	margin: 0;
 	min-height: 100vh;
+  color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -16,27 +23,59 @@ body {
 	transition: background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-body[data-section="videos"] {
-	background-position: 40% center;
+p {
+	margin: 0;
+	padding: 16px 20px;
+	background: #0095da;
+	border: 2px solid #fff;
+	border-radius: 16px;
+	font-size: clamp(22px, 2.2vw, 35px);
+	line-height: 1.5;
 }
 
-body[data-section="information"] {
-	background-position: 50% center;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(0, 0, 0, 0.5);
 }
 
-body[data-section="models"] {
-	background-position: 60% center;
+h1 {
+  font-size: clamp(48px, 4vw, 72px);
 }
 
-* {
-	font-family: 'Sora', sans-serif;
-	box-sizing: border-box;
+h2 {
+  font-size: clamp(40px, 3.5vw, 60px);
 }
 
-body.modal-open {
-	overflow: hidden;
+h3 {
+  font-size: clamp(32px, 3vw, 48px);
 }
 
+h4 {
+  font-size: clamp(28px, 2.5vw, 40px);
+}
+
+h5 {
+  font-size: clamp(24px, 2vw, 32px);
+}
+
+h6 {
+  font-size: clamp(20px, 1.8vw, 28px);
+}
+
+/* Header Logo */
+.header-logo {
+	position: fixed;
+	top: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: min(320px, 70vw);
+	height: auto;
+	filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+	z-index: 21;
+	pointer-events: none;
+}
+
+/* Section Navigation */
 .section-nav {
 	position: fixed;
 	top: 110px;
@@ -53,18 +92,6 @@ body.modal-open {
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	z-index: 20;
-}
-
-.header-logo {
-	position: fixed;
-	top: 16px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: min(320px, 70vw);
-	height: auto;
-	filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
-	z-index: 21;
-	pointer-events: none;
 }
 
 .section-btn {
@@ -92,6 +119,7 @@ body.modal-open {
 	border-color: rgba(255, 255, 255, 0.9);
 }
 
+/* Sections */
 .sections-container {
 	width: 100%;
 	height: calc(100vh - var(--nav-offset, 220px));
@@ -161,11 +189,7 @@ body.modal-open {
 	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.4s;
 }
 
-#home-section {
-	justify-content: flex-start;
-}
-
-.header-img {
+.section-header {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -195,7 +219,7 @@ body.modal-open {
 
 .section-body {
 	position: absolute;
-	top: calc(var(--header-img-height, 0px) + 24px);
+	top: calc(var(--section-header-height, 0px) + 24px);
 	bottom: calc(var(--section-footer-height, 0px) + 24px);
 	left: 0;
 	width: 100%;
@@ -206,21 +230,14 @@ body.modal-open {
 	gap: 16px;
 }
 
-p {
-	margin: 0;
-	padding: 16px 20px;
-	background: #0095da;
-	border: 2px solid #fff;
-	border-radius: 16px;
-	color: #fff;
-	font-size: clamp(22px, 2.2vw, 35px);
-	line-height: 1.5;
-}
-
 .button-list {
 	width: 100%;
 	max-width: 600px;
 	margin: 0 auto;
+}
+
+.button-list button {
+	max-width: 500px;
 }
 
 /* Shared pill button style */
@@ -239,57 +256,4 @@ p {
 	justify-content: center;
 	font-size: 24px;
 	font-weight: 500;
-}
-
-.button-list button {
-	max-width: 500px;
-}
-
-
-.video-modal-bar {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	padding: 0 8px;
-}
-
-.video-modal-back {
-	background: rgba(255, 255, 255, 0.2);
-	border-color: rgba(255, 255, 255, 0.4);
-	color: #fff;
-	backdrop-filter: blur(10px);
-}
-
-.video-modal-back:hover,
-.video-modal-back:focus {
-	background: rgba(255, 255, 255, 0.3);
-	border-color: rgba(255, 255, 255, 0.6);
-	color: #fff;
-}
-
-.video-container {
-	position: relative;
-	z-index: 1;
-	width: min(94vw, 1000px);
-	height: auto;
-	display: inline-block;
-	margin: 0;
-	background: #000;
-	border-radius: 16px;
-	overflow: hidden;
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-	will-change: transform, opacity;
-}
-
-.video-container video {
-	width: 100%;
-	height: auto;
-	object-fit: contain;
-	display: block;
-	transform-origin: center;
-}
-
-@keyframes video-zoom {
-	from { transform: scale(1); }
-	to { transform: scale(1.08); }
 }

@@ -6,11 +6,11 @@ const updateNavOffset = () => {
 	const offset = rect.top + window.scrollY + rect.height + 16;
 	document.documentElement.style.setProperty("--nav-offset", `${offset}px`);
 	const activeSection = document.querySelector(".section.active");
-	const activeHeader = activeSection?.querySelector(".header-img") || null;
+	const activeHeader = activeSection?.querySelector(".section-header") || null;
 	const activeFooter = activeSection?.querySelector(".section-footer") || null;
 	const headerHeight = activeHeader ? activeHeader.getBoundingClientRect().height : 0;
 	const footerHeight = activeFooter ? activeFooter.getBoundingClientRect().height : 0;
-	document.documentElement.style.setProperty("--header-img-height", `${headerHeight}px`);
+	document.documentElement.style.setProperty("--section-header-height", `${headerHeight}px`);
 	document.documentElement.style.setProperty("--section-footer-height", `${footerHeight}px`);
 };
 
@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
 	updateNavOffset();
 });
 
-document.querySelectorAll(".header-img").forEach((img) => {
+document.querySelectorAll(".section-header").forEach((img) => {
 	img.addEventListener("load", updateNavOffset);
 });
 
