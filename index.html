@@ -71,7 +71,11 @@
 
     <div class="section" id="robot-section">
       <div class="robot-container">
-        <img src="./src/img/2026robot.png" alt="2026 Robot" class="robot-image">
+        <img src="./src/img/our-robot/Full Robot.png" alt="2026 Robot" class="robot-image" data-full-robot="./src/img/our-robot/Full Robot.png">
+        <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          Reset
+        </button>
 
         <!-- Labeled components around the robot -->
         <button class="robot-label robot-label-hopper" data-component="hopper">
@@ -95,7 +99,7 @@
         </button>
 
         <button class="robot-label robot-label-acquisition" data-component="acquisition">
-          <span class="label-name">Aquisition</span>
+          <span class="label-name">Acquisition</span>
           <span class="label-subtitle">learn more</span>
         </button>
       </div>
@@ -324,6 +328,7 @@
   <script src="./src/js/hash-routing.js"></script>
   <script src="./src/js/video-modal.js"></script>
   <script src="./src/js/social-modal.js"></script>
+  <script src="./src/js/our-robot.js"></script>
   <script src="./src/js/main.js"></script>
 </body>
 
