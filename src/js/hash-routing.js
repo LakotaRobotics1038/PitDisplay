@@ -1,7 +1,7 @@
 const sectionBtns = document.querySelectorAll(".section-btn");
 const sections = document.querySelectorAll(".section");
 
-const sectionOrder = ["home", "robot", "about", "fll", "workshops", "pgsc", "sponsors"];
+const sectionOrder = ["home", "robot", "about", "fll", "workshops", "community", "pgsc", "sponsors"];
 
 const switchSection = (sectionName) => {
   const currentSection = document.querySelector(".section.active");
