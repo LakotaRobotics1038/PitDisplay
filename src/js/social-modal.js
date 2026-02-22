@@ -23,24 +23,12 @@ if (socialModalEl && socialButtons.length > 0 && window.bootstrap) {
     return names[social] || social;
   };
 
-  const getQrFileName = (social) => {
-    const fileNames = {
-      'facebook': 'facebook.svg',
-      'instagram': 'instagram.svg',
-      'linkedin': 'linkedin.svg',
-      'youtube': 'youtube.svg',
-      'tiktok': 'tiktok.svg',
-      'twitter-x': 'twitter-x.svg'
-    };
-    return fileNames[social] || `${social}.svg`;
-  };
-
   const openSocialModal = (button) => {
     const social = button.getAttribute("data-social");
     const handle = button.getAttribute("data-handle");
 
     if (handle) {
-      const qrCodePath = `./src/img/qr-codes/${getQrFileName(social)}`;
+      const qrCodePath = "./src/img/qr-codes/linktree.svg";
       socialQrCode.src = qrCodePath;
       socialQrCode.alt = `QR Code for ${getSocialName(social)}`;
       socialModalTitle.textContent = `Follow us on ${getSocialName(social)}`;
