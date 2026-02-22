@@ -1,4 +1,9 @@
 #about-section {
+  .our-team-toolbar {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .team-card {
     display: flex;
     flex-direction: column;
@@ -40,5 +45,43 @@
 
   .team-text p:not(:last-child) {
     margin-bottom: 2rem;
+  }
+}
+
+#leadership-modal {
+  .modal-dialog {
+    max-width: calc(100vw - 40px);
+    width: calc(100vw - 40px);
+    margin: 20px auto;
+  }
+
+  .modal-content {
+    background: transparent;
+    border: none;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .leadership-modal-image {
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 3px solid #fff;
+  }
+
+  .leadership-modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
 }
