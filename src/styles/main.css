@@ -39,11 +39,14 @@ body.modal-open {
 
 .section-nav {
 	position: fixed;
-	top: 20px;
+	top: 110px;
 	left: 50%;
 	transform: translateX(-50%);
 	display: flex;
-	gap: 16px;
+	flex-wrap: wrap;
+	gap: 12px 16px;
+	justify-content: center;
+	width: min(96vw, 1600px);
 	background: rgba(0, 0, 0, 0.2);
 	border-radius: 50px;
 	padding: 12px;
@@ -52,16 +55,28 @@ body.modal-open {
 	z-index: 20;
 }
 
+.header-logo {
+	position: fixed;
+	top: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: min(320px, 70vw);
+	height: auto;
+	filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+	z-index: 21;
+	pointer-events: none;
+}
+
 .section-btn {
 	background: rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	color: rgba(255, 255, 255, 0.7);
-	padding: 16px 32px;
+	padding: 14px 28px;
 	border-radius: 50px;
 	cursor: pointer;
-	font-size: 24px;
+	font-size: clamp(20px, 1.8vw, 26px);
 	transition: all 0.3s ease;
-	min-width: 180px;
+	min-width: 175px;
 }
 
 .section-btn:hover {
@@ -143,6 +158,17 @@ body.modal-open {
 	transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.4s;
 }
 
+.footer-img {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 1200px;
+	height: auto;
+	pointer-events: none;
+}
+
 .button-list {
 	display: flex;
 	flex-direction: column;
@@ -157,7 +183,7 @@ body.modal-open {
 .pill-button,
 .button-list button,
 .robot-label {
-	background: rgba(124, 81, 161, 0.7);
+	background: rgba(124, 81, 161);
 	border: 3px solid rgba(255, 255, 255, 0.9);
 	color: white;
 	border-radius: 50px;
@@ -251,99 +277,4 @@ body.modal-open {
 @keyframes video-zoom {
 	from { transform: scale(1); }
 	to { transform: scale(1.08); }
-}
-
-/* Robot Section Styles */
-.robot-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-}
-
-.robot-image {
-	max-width: 85%;
-	max-height: 85%;
-	object-fit: contain;
-	object-position: center;
-	z-index: 1;
-}
-
-.robot-label {
-	position: absolute;
-	flex-direction: column;
-	gap: 4px;
-	z-index: 25;
-	min-width: 140px;
-}
-
-.robot-label:hover {
-	background: rgba(124, 81, 161, 0.9);
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
-.robot-label .label-name {
-	font-size: 22px;
-	font-weight: 600;
-	line-height: 1;
-}
-
-.robot-label .label-subtitle {
-	font-size: 18px;
-	opacity: 0.95;
-	font-weight: 400;
-}
-
-/* Position each label around the robot */
-.robot-label-hopper {
-	left: 5%;
-	top: 47%;
-	transform: translateY(-50%);
-}
-
-.robot-label-hopper:hover {
-	transform: translateY(-50%) scale(1.1);
-}
-
-.robot-label-climb {
-	left: 64%;
-	top: 28%;
-	transform: translateX(-50%);
-}
-
-.robot-label-climb:hover {
-	transform: translateX(-50%) scale(1.1);
-}
-
-.robot-label-shooters {
-	left: 30%;
-	top: 27%;
-	transform: translateY(-50%);
-}
-
-.robot-label-shooters:hover {
-	transform: translateY(-50%) scale(1.1);
-}
-
-.robot-label-drivetrain {
-	right: 8%;
-	bottom: 35%;
-	transform: none;
-}
-
-.robot-label-drivetrain:hover {
-	transform: scale(1.1);
-}
-
-.robot-label-acquisition {
-	left: 50%;
-	bottom: 29%;
-	transform: translateX(-50%);
-}
-
-.robot-label-acquisition:hover {
-	transform: translateX(-50%) scale(1.1);
 }

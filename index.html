@@ -4,29 +4,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pit Display</title>
+  <title>1038 Pit Display</title>
   <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="stylesheet" href="./src/styles/our-robot.css">
 </head>
 
 <body>
 
+  <img class="header-logo" src="./src/img/1038-LOGO-wings.png" alt="1038 Wings Logo">
+
   <div class="section-nav">
-    <button class="section-btn active" data-section="about">About Our Team</button>
-    <button class="section-btn" data-section="robot">About Our Robot</button>
-    <button class="section-btn" data-section="impact">1038 IMPACT</button>
+    <button class="section-btn active" data-section="home">Home</button>
+    <button class="section-btn" data-section="robot">Our Robot</button>
+    <button class="section-btn" data-section="about">Our Team</button>
+    <button class="section-btn" data-section="fll">FLL</button>
+    <button class="section-btn" data-section="workshops">Workshops</button>
+    <button class="section-btn" data-section="pgsc">PGSC</button>
     <button class="section-btn" data-section="sponsors">Our Sponsors</button>
   </div>
 
   <div class="sections-container">
-    <div class="section active" id="about-section">
-      <div class="button-list">
-        <button class="open-panel" data-video="./src/videos/sponsorthankyouvideo.mp4">Sponsor Thank You Video</button>
-        <button class="open-panel" data-video="./src/videos/2023masontrailervid.mp4">2024 Mason Trailer Video</button>
-        <button class="open-panel" data-video="./src/videos/2024robotnamereveal.mp4">2024 Robot Name Reveal</button>
-        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
-        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2025 Impact Video</button>
-        <button class="open-panel" data-video="./src/videos/2023impactvideo.mp4">2023 Impact Video</button>
-      </div>
+    <div class="section active" id="home-section">
+      <img class="footer-img" src="./src/img/Home Bar.png">
     </div>
 
     <div class="section" id="robot-section">
@@ -61,22 +60,21 @@
       </div>
     </div>
 
-    <div class="section" id="impact-section">
+    <div class="section" id="about-section">
+    </div>
+
+    <div class="section" id="fll-section"></div>
+
+    <div class="section" id="workshops-section"></div>
+
+    <div class="section" id="pgsc-section"></div>
+
+    <div class="section" id="sponsors-section">
       <div class="button-list">
-        <button class="model-btn">Robot Model</button>
-        <button class="model-btn">Mechanism Demo</button>
-        <button class="model-btn">CAD Design</button>
+        <button class="open-panel" data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
+        <button class="open-panel" data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
       </div>
     </div>
-  </div>
-
-  <div class="section" id="sponsors-section">
-    <div class="button-list">
-      <button class="model-btn">Robot Model</button>
-      <button class="model-btn">Mechanism Demo</button>
-      <button class="model-btn">CAD Design</button>
-    </div>
-  </div>
   </div>
 
   <div class="panel" id="video-panel" aria-hidden="true">
