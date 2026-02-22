@@ -1,6 +1,0 @@
-#fll-section {
-  img[src*="LR_FLL_white_logo.svg"],
-  img[src*="team-logos"] {
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
-  }
-}
