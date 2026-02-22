@@ -1,94 +1,96 @@
 /* Robot Section Styles */
-.robot-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-}
+#robot-section {
+	.robot-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
 
-.robot-image {
-	max-width: 85%;
-	max-height: 85%;
-	object-fit: contain;
-	object-position: center;
-	z-index: 1;
-}
+	.robot-image {
+		max-width: 85%;
+		max-height: 85%;
+		object-fit: contain;
+		object-position: center;
+		z-index: 1;
+	}
 
-.robot-label {
-	position: absolute;
-	flex-direction: column;
-	gap: 4px;
-	z-index: 25;
-	min-width: 140px;
-}
+	.robot-label {
+		position: absolute;
+		flex-direction: column;
+		gap: 4px;
+		z-index: 25;
+		min-width: 140px;
 
-.robot-label:hover {
-	background: rgba(124, 81, 161, 0.9);
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
+		&:hover {
+			background: rgba(124, 81, 161, 0.9);
+			box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+		}
 
-.robot-label .label-name {
-	font-size: 22px;
-	font-weight: 600;
-	line-height: 1;
-}
+		.label-name {
+			font-size: 22px;
+			font-weight: 600;
+			line-height: 1;
+		}
 
-.robot-label .label-subtitle {
-	font-size: 18px;
-	opacity: 0.95;
-	font-weight: 400;
-}
+		.label-subtitle {
+			font-size: 18px;
+			opacity: 0.95;
+			font-weight: 400;
+		}
+	}
 
-/* Position each label around the robot */
-.robot-label-hopper {
-	left: 5%;
-	top: 47%;
-	transform: translateY(-50%);
-}
+	/* Position each label around the robot */
+	.robot-label-hopper {
+		left: 5%;
+		top: 47%;
+		transform: translateY(-50%);
 
-.robot-label-hopper:hover {
-	transform: translateY(-50%) scale(1.1);
-}
+		&:hover {
+			transform: translateY(-50%) scale(1.1);
+		}
+	}
 
-.robot-label-climb {
-	left: 64%;
-	top: 28%;
-	transform: translateX(-50%);
-}
+	.robot-label-climb {
+		left: 64%;
+		top: 28%;
+		transform: translateX(-50%);
 
-.robot-label-climb:hover {
-	transform: translateX(-50%) scale(1.1);
-}
+		&:hover {
+			transform: translateX(-50%) scale(1.1);
+		}
+	}
 
-.robot-label-shooters {
-	left: 30%;
-	top: 27%;
-	transform: translateY(-50%);
-}
+	.robot-label-shooters {
+		left: 30%;
+		top: 27%;
+		transform: translateY(-50%);
 
-.robot-label-shooters:hover {
-	transform: translateY(-50%) scale(1.1);
-}
+		&:hover {
+			transform: translateY(-50%) scale(1.1);
+		}
+	}
 
-.robot-label-drivetrain {
-	right: 8%;
-	bottom: 35%;
-	transform: none;
-}
+	.robot-label-drivetrain {
+		right: 8%;
+		bottom: 35%;
+		transform: none;
 
-.robot-label-drivetrain:hover {
-	transform: scale(1.1);
-}
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
 
-.robot-label-acquisition {
-	left: 50%;
-	bottom: 29%;
-	transform: translateX(-50%);
-}
+	.robot-label-acquisition {
+		left: 50%;
+		bottom: 29%;
+		transform: translateX(-50%);
 
-.robot-label-acquisition:hover {
-	transform: translateX(-50%) scale(1.1);
+		&:hover {
+			transform: translateX(-50%) scale(1.1);
+		}
+	}
 }

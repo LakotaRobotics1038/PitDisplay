@@ -3,6 +3,9 @@ const panel = document.getElementById("video-panel");
 const videoEl = document.getElementById("modal-video");
 const sectionBtns = document.querySelectorAll(".section-btn");
 const sections = document.querySelectorAll(".section");
+const nav = document.querySelector(".section-nav");
+const headerImg = document.querySelector(".header-img");
+const footerImg = document.querySelector(".footer-img");
 
 // Section order for determining slide direction
 const sectionOrder = ['home', 'robot', 'about', 'fll', 'workshops', 'pgsc', 'sponsors'];
@@ -73,6 +76,21 @@ const switchSection = (sectionName) => {
 	}
 };
 
+const updateNavOffset = () => {
+	if (!nav) return;
+	const rect = nav.getBoundingClientRect();
+	const offset = rect.top + window.scrollY + rect.height + 16;
+	document.documentElement.style.setProperty("--nav-offset", `${offset}px`);
+	if (headerImg) {
+		const headerRect = headerImg.getBoundingClientRect();
+		document.documentElement.style.setProperty("--header-img-height", `${headerRect.height}px`);
+	}
+	if (footerImg) {
+		const footerRect = footerImg.getBoundingClientRect();
+		document.documentElement.style.setProperty("--footer-img-height", `${footerRect.height}px`);
+	}
+};
+
 // Handle hash changes (browser back/forward and direct hash navigation)
 const handleHashChange = () => {
 	const hash = window.location.hash.slice(1); // Remove the '#' character
@@ -83,14 +101,24 @@ const handleHashChange = () => {
 
 // Listen for hash changes
 window.addEventListener('hashchange', handleHashChange);
+window.addEventListener('resize', updateNavOffset);
 
 // Initialize on page load
 window.addEventListener('load', () => {
+	updateNavOffset();
 	const hash = window.location.hash.slice(1);
 	if (hash && sectionOrder.includes(hash)) {
 		switchSection(hash);
 	}
 });
+
+if (headerImg) {
+	headerImg.addEventListener("load", updateNavOffset);
+}
+
+if (footerImg) {
+	footerImg.addEventListener("load", updateNavOffset);
+}
 
 sectionBtns.forEach(btn => {
 	btn.addEventListener("click", () => {
