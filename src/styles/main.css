@@ -218,18 +218,13 @@ p {
 }
 
 .button-list {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 16px;
-	padding: 24px;
 	width: 100%;
 	max-width: 600px;
+	margin: 0 auto;
 }
 
 /* Shared pill button style */
 .pill-button,
-.button-list button,
 .robot-label {
 	background: #7c51a1;
 	border: 3px solid rgba(255, 255, 255, 0.9);
@@ -247,57 +242,29 @@ p {
 }
 
 .button-list button {
-	min-height: 48px;
-	min-width: 0;
-	width: 100%;
 	max-width: 500px;
-	flex-direction: column;
 }
 
-.button-list button:hover {
-	background: rgba(124, 81, 161, 0.9);
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-	transform: scale(1.05);
-}
 
-.panel {
-	position: fixed;
-	inset: 0;
-	display: none;
-	opacity: 0;
-	z-index: 100;
-	align-items: center;
-	justify-content: center;
-}
-
-.panel.is-open {
-	display: block;
-	opacity: 1;
+.video-modal-bar {
+	width: 100%;
 	display: flex;
+	justify-content: flex-end;
+	padding: 0 8px;
 }
 
-.panel-bg {
-	position: absolute;
-	inset: 0;
-	background: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(20px);
-	will-change: opacity;
-}
-
-.panel-back {
-	position: absolute;
-	top: 32%;
-	right: 16px;
-	z-index: 2;
+.video-modal-back {
 	background: rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.4);
 	color: #fff;
-	border: 1px solid rgba(255, 255, 255, 0.4);
-	border-radius: 999px;
-	padding: 0.5rem 1rem;
-	min-height: 44px;
-	min-width: 64px;
-	font-size: 1.5rem;
-	cursor: pointer;
+	backdrop-filter: blur(10px);
+}
+
+.video-modal-back:hover,
+.video-modal-back:focus {
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgba(255, 255, 255, 0.6);
+	color: #fff;
 }
 
 .video-container {

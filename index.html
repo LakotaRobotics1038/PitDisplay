@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1038 Pit Display</title>
+  <link rel="stylesheet" href="./src/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="./src/styles/bootstrap-overrides.css">
   <link rel="stylesheet" href="./src/styles/main.css">
   <link rel="stylesheet" href="./src/styles/home.css">
   <link rel="stylesheet" href="./src/styles/our-team.css">
@@ -76,8 +78,8 @@
 
     <div class="section" id="about-section">
       <div class="section-body">
-        <div class="team-cards">
-          <div class="team-card">
+        <div class="team-cards row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3 align-items-end">
+          <div class="team-card col">
             <div class="team-card-media">
               <img class="team-card-base" src="./src/img/our-team/Controls Picture.png" alt="Controls Team">
               <div class="team-card-badge">
@@ -85,7 +87,7 @@
               </div>
             </div>
           </div>
-          <div class="team-card">
+          <div class="team-card col">
             <div class="team-card-media">
               <img class="team-card-base" src="./src/img/our-team/CAD Picture.png" alt="CAD Team">
               <div class="team-card-badge">
@@ -93,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="team-card">
+          <div class="team-card col">
             <div class="team-card-media">
               <img class="team-card-base" src="./src/img/our-team/M&M Picture.png" alt="Media and Marketing Team">
               <div class="team-card-badge">
@@ -101,7 +103,7 @@
               </div>
             </div>
           </div>
-          <div class="team-card">
+          <div class="team-card col">
             <div class="team-card-media">
               <img class="team-card-base" src="./src/img/our-team/Mechanical Picture.png" alt="Mechanical Team">
               <div class="team-card-badge">
@@ -131,23 +133,31 @@
     <div class="section" id="pgsc-section"></div>
 
     <div class="section" id="sponsors-section">
-      <div class="button-list">
-        <button class="open-panel" data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
-        <button class="open-panel" data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
+      <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
+        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100" data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
+        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100" data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
       </div>
     </div>
   </div>
 
-  <div class="panel" id="video-panel" aria-hidden="true">
-    <div class="panel-bg" data-close></div>
-    <button class="panel-back" data-close aria-label="Back">Back</button>
-    <div class="video-container">
-      <video id="modal-video" autoplay muted playsinline loop></video>
+  <div class="modal fade video-modal" id="video-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="video-modal-bar">
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill video-modal-back" data-bs-dismiss="modal" aria-label="Back">Back</button>
+          </div>
+          <div class="video-container">
+            <video id="modal-video" autoplay muted playsinline loop></video>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <script src="./src/lib/bootstrap.bundle.min.js"></script>
   <script src="./src/js/hash-routing.js"></script>
-  <script src="./src/js/video-panel.js"></script>
+  <script src="./src/js/video-modal.js"></script>
   <script src="./src/js/main.js"></script>
 </body>
 

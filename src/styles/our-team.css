@@ -1,11 +1,4 @@
 #about-section {
-	.team-cards {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 18px;
-		align-items: end;
-	}
-
 	.team-card {
 		display: flex;
 		flex-direction: column;
