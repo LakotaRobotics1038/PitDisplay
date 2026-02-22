@@ -1,0 +1,56 @@
+.btn-primary {
+  background-color: #7c51a1;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #6f4694;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.show>.btn-primary.dropdown-toggle {
+  background-color: #5f3b83;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.35);
+}
+
+.btn {
+  font-size: 1.35rem;
+}
+
+.btn-lg {
+  font-size: 1.5rem;
+}
+
+.video-modal .modal-content {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.video-modal .modal-dialog {
+  max-width: min(94vw, 1000px);
+  margin: 0 auto;
+}
+
+.video-modal .modal-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-backdrop.show {
+  backdrop-filter: blur(20px);
+}

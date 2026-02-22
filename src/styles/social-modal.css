@@ -1,0 +1,60 @@
+#social-modal .modal-content {
+  background: transparent;
+  border: none;
+}
+
+.social-modal-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px;
+}
+
+.social-container {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.social-modal-back {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.social-modal-back:hover,
+.social-modal-back:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+
+#social-modal-title {
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#social-qr-container {
+  background: white;
+  border-radius: 16px;
+  display: inline-block;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+#social-qr-code {
+  display: block;
+  border-radius: 8px;
+  min-width: 300px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+#social-modal-handle {
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

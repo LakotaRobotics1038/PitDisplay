@@ -1,0 +1,7 @@
+#home-section {
+  justify-content: flex-start;
+
+  p {
+    font-size: 2rem;
+  }
+}

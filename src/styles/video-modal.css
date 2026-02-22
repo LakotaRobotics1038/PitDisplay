@@ -1,0 +1,56 @@
+.modal-open {
+  overflow: hidden;
+}
+
+.video-modal-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px;
+}
+
+.video-modal-back {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.video-modal-back:hover,
+.video-modal-back:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+
+.video-container {
+  position: relative;
+  z-index: 1;
+  width: min(94vw, 1000px);
+  height: auto;
+  display: inline-block;
+  margin: 0;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  will-change: transform, opacity;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transform-origin: center;
+}
+
+@keyframes video-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
