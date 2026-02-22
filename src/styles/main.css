@@ -174,27 +174,35 @@ body.modal-open {
 	pointer-events: none;
 }
 
-.footer-img {
+.section-footer {
 	position: absolute;
 	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+	pointer-events: none;
+}
+
+.section-footer img {
 	width: 100%;
 	max-width: 1200px;
 	height: auto;
-	pointer-events: none;
+	display: block;
 }
 
 .section-body {
 	position: absolute;
 	top: calc(var(--header-img-height, 0px) + 24px);
-	bottom: calc(var(--footer-img-height, 0px) + 24px);
+	bottom: calc(var(--section-footer-height, 0px) + 24px);
 	left: 0;
 	width: 100%;
 	padding: 0 4vw;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-around;
 	gap: 16px;
 }
 

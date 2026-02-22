@@ -1,33 +1,31 @@
 const nav = document.querySelector(".section-nav");
-const headerImg = document.querySelector(".header-img");
-const footerImg = document.querySelector(".footer-img");
 
 const updateNavOffset = () => {
 	if (!nav) return;
 	const rect = nav.getBoundingClientRect();
 	const offset = rect.top + window.scrollY + rect.height + 16;
 	document.documentElement.style.setProperty("--nav-offset", `${offset}px`);
-	if (headerImg) {
-		const headerRect = headerImg.getBoundingClientRect();
-		document.documentElement.style.setProperty("--header-img-height", `${headerRect.height}px`);
-	}
-	if (footerImg) {
-		const footerRect = footerImg.getBoundingClientRect();
-		document.documentElement.style.setProperty("--footer-img-height", `${footerRect.height}px`);
-	}
+	const activeSection = document.querySelector(".section.active");
+	const activeHeader = activeSection?.querySelector(".header-img") || null;
+	const activeFooter = activeSection?.querySelector(".section-footer") || null;
+	const headerHeight = activeHeader ? activeHeader.getBoundingClientRect().height : 0;
+	const footerHeight = activeFooter ? activeFooter.getBoundingClientRect().height : 0;
+	document.documentElement.style.setProperty("--header-img-height", `${headerHeight}px`);
+	document.documentElement.style.setProperty("--section-footer-height", `${footerHeight}px`);
 };
 
 window.addEventListener('resize', updateNavOffset);
+window.addEventListener('hashchange', updateNavOffset);
 
 // Initialize on page load
 window.addEventListener('load', () => {
 	updateNavOffset();
 });
 
-if (headerImg) {
-	headerImg.addEventListener("load", updateNavOffset);
-}
+document.querySelectorAll(".header-img").forEach((img) => {
+	img.addEventListener("load", updateNavOffset);
+});
 
-if (footerImg) {
-	footerImg.addEventListener("load", updateNavOffset);
-}
+document.querySelectorAll(".section-footer img").forEach((img) => {
+	img.addEventListener("load", updateNavOffset);
+});
