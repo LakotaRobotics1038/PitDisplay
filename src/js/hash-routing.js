@@ -3,7 +3,8 @@ const sections = document.querySelectorAll(".section");
 
 const sectionOrder = ["home", "robot", "about", "fll", "workshops", "community", "pgsc", "sponsors"];
 
-const switchSection = (sectionName) => {
+// Make switchSection globally available
+window.switchSection = (sectionName) => {
   const currentSection = document.querySelector(".section.active");
   const targetSection = document.getElementById(`${sectionName}-section`);
   const targetBtn = document.querySelector(`[data-section="${sectionName}"]`);
@@ -56,7 +57,7 @@ const switchSection = (sectionName) => {
 const handleHashChange = () => {
   const hash = window.location.hash.slice(1);
   if (hash && sectionOrder.includes(hash)) {
-    switchSection(hash);
+    window.switchSection(hash);
   }
 };
 
@@ -65,13 +66,13 @@ window.addEventListener("hashchange", handleHashChange);
 window.addEventListener("load", () => {
   const hash = window.location.hash.slice(1);
   if (hash && sectionOrder.includes(hash)) {
-    switchSection(hash);
+    window.switchSection(hash);
   }
 });
 
 sectionBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const sectionName = btn.getAttribute("data-section");
-    switchSection(sectionName);
+    window.switchSection(sectionName);
   });
 });

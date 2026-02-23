@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./src/styles/home.css">
   <link rel="stylesheet" href="./src/styles/our-team.css">
   <link rel="stylesheet" href="./src/styles/our-robot.css">
+  <link rel="stylesheet" href="./src/styles/idle-screen.css">
 </head>
 
 <body>
@@ -344,12 +345,24 @@
     </div>
   </div>
 
+  <!-- Idle Screen -->
+  <div id="idle-screen" class="idle-screen">
+    <video id="idle-video" autoplay muted playsinline></video>
+    <div class="idle-overlay">
+      <div class="idle-overlay-content">
+        <i class="bi bi-hand-index-thumb"></i>
+        <p>Tap to interact</p>
+      </div>
+    </div>
+  </div>
+
   <script src="./src/lib/bootstrap.bundle.min.js"></script>
   <script src="./src/js/hash-routing.js"></script>
   <script src="./src/js/video-modal.js"></script>
   <script src="./src/js/social-modal.js"></script>
   <script src="./src/js/our-robot.js"></script>
   <script src="./src/js/main.js"></script>
+  <script src="./src/js/idle-screen.js"></script>
 </body>
 
 </html>
