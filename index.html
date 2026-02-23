@@ -72,39 +72,45 @@
     </div>
 
     <div class="section" id="robot-section">
-      <div class="robot-container">
-        <img src="./src/img/our-robot/Full Robot.png" alt="2026 Robot" class="robot-image"
-          data-full-robot="./src/img/our-robot/Full Robot.png">
-        <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">
-          <i class="bi bi-arrow-counterclockwise"></i>
-          Reset
-        </button>
+      <div class="section-body">
+        <div class="robot-container">
+          <img src="./src/img/our-robot/Full Robot.png" alt="2026 Robot" class="robot-image"
+            data-full-robot="./src/img/our-robot/Full Robot.png">
+          <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            Reset
+          </button>
 
-        <!-- Labeled components around the robot -->
-        <button class="robot-label robot-label-hopper" data-component="hopper">
-          <span class="label-name">Hopper</span>
-          <span class="label-subtitle">learn more</span>
-        </button>
+          <!-- Labeled components around the robot -->
+          <button class="robot-label robot-label-hopper" data-component="hopper">
+            <span class="label-name">Hopper</span>
+            <span class="label-subtitle">learn more</span>
+          </button>
 
-        <button class="robot-label robot-label-climb" data-component="climb">
-          <span class="label-name">Climb</span>
-          <span class="label-subtitle">learn more</span>
-        </button>
+          <button class="robot-label robot-label-climb" data-component="climb">
+            <span class="label-name">Climb</span>
+            <span class="label-subtitle">learn more</span>
+          </button>
 
-        <button class="robot-label robot-label-shooters" data-component="shooters">
-          <span class="label-name">Shooters</span>
-          <span class="label-subtitle">learn more</span>
-        </button>
+          <button class="robot-label robot-label-shooters" data-component="shooters">
+            <span class="label-name">Shooters</span>
+            <span class="label-subtitle">learn more</span>
+          </button>
 
-        <button class="robot-label robot-label-drivetrain" data-component="drivetrain">
-          <span class="label-name">Drive Train</span>
-          <span class="label-subtitle">learn more</span>
-        </button>
+          <button class="robot-label robot-label-drivetrain" data-component="drivetrain">
+            <span class="label-name">Drive Train</span>
+            <span class="label-subtitle">learn more</span>
+          </button>
 
-        <button class="robot-label robot-label-acquisition" data-component="acquisition">
-          <span class="label-name">Acquisition</span>
-          <span class="label-subtitle">learn more</span>
-        </button>
+          <button class="robot-label robot-label-acquisition" data-component="acquisition">
+            <span class="label-name">Acquisition</span>
+            <span class="label-subtitle">learn more</span>
+          </button>
+        </div>
+        <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
+          <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
+            data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
+        </div>
       </div>
     </div>
 
@@ -302,17 +308,14 @@
         <h2>Removing Financial Barriers to Participation</h2>
         <p>Team 1038 eliminates cost obstacles by offering free participation, travel grants, and meals, ensuring that
           high-quality STEM education is accessible to all interested students.</p>
+        <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
+          <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
+            data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
+        </div>
       </div>
     </div>
 
-    <div class="section" id="sponsors-section">
-      <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
-        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
-          data-video="./src/videos/2025robotnamereveal.mp4">2025 Robot Name Reveal</button>
-        <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
-          data-video="./src/videos/2025impactvideo.mp4">2025 Impact Video</button>
-      </div>
-    </div>
+    <div class="section" id="sponsors-section"></div>
   </div>
 
   <div class="modal fade video-modal" id="video-modal" tabindex="-1" aria-hidden="true">
