@@ -28,6 +28,14 @@ const transitionImage = (newSrc) => {
 	}, 300);
 };
 
+const resetRobotSection = () => {
+	if (!fullRobotSrc) return;
+	transitionImage(fullRobotSrc);
+	if (robotResetBtn) {
+		robotResetBtn.style.display = "none";
+	}
+};
+
 robotLabels.forEach((label) => {
 	label.addEventListener("click", () => {
 		const component = label.dataset.component;
@@ -45,10 +53,8 @@ robotLabels.forEach((label) => {
 
 if (robotResetBtn) {
 	robotResetBtn.addEventListener("click", () => {
-		if (fullRobotSrc) {
-			transitionImage(fullRobotSrc);
-			// Hide reset button
-			robotResetBtn.style.display = "none";
-		}
+		resetRobotSection();
 	});
 }
+
+window.resetRobotSection = resetRobotSection;

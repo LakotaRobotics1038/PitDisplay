@@ -8,8 +8,13 @@ window.switchSection = (sectionName) => {
   const currentSection = document.querySelector(".section.active");
   const targetSection = document.getElementById(`${sectionName}-section`);
   const targetBtn = document.querySelector(`[data-section="${sectionName}"]`);
+  const currentName = currentSection?.id.replace("-section", "") || null;
 
   if (currentSection === targetSection) return;
+
+  if (currentName === "robot" && sectionName !== "robot") {
+    window.resetRobotSection?.();
+  }
 
   window.location.hash = sectionName;
   document.body.setAttribute("data-section", sectionName);
