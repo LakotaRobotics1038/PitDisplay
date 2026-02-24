@@ -1,0 +1,125 @@
+#seniors-modal .modal-content {
+  background: transparent;
+  border: none;
+}
+
+.seniors-modal-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px;
+  gap: 8px;
+}
+
+.seniors-container {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+}
+
+.seniors-modal-lg {
+  max-width: 1200px;
+}
+
+.seniors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.senior-image-btn {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition: transform 0.2s ease;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+.senior-image-btn:hover,
+.senior-image-btn:focus {
+  transform: scale(1.05);
+  outline: none;
+}
+
+.senior-image-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+.seniors-modal-back,
+.seniors-modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.seniors-modal-back:hover,
+.seniors-modal-back:focus,
+.seniors-modal-close:hover,
+.seniors-modal-close:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+#seniors-fullscreen-modal .modal-content {
+  background: rgba(0, 0, 0, 0.9);
+  border: none;
+}
+
+.seniors-fullscreen-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+#fullscreen-senior-image {
+  max-height: 80vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.seniors-fullscreen-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.seniors-fullscreen-back,
+.seniors-fullscreen-close {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.seniors-fullscreen-back:hover,
+.seniors-fullscreen-back:focus,
+.seniors-fullscreen-close:hover,
+.seniors-fullscreen-close:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}

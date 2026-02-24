@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./src/styles/main.css">
   <link rel="stylesheet" href="./src/styles/video-modal.css">
   <link rel="stylesheet" href="./src/styles/social-modal.css">
+  <link rel="stylesheet" href="./src/styles/seniors-modal.css">
   <link rel="stylesheet" href="./src/styles/home.css">
   <link rel="stylesheet" href="./src/styles/our-team.css">
   <link rel="stylesheet" href="./src/styles/our-robot.css">
@@ -162,6 +163,8 @@
           </div>
         </div>
         <div class="our-team-toolbar">
+          <button class="pill-button me-4" type="button" data-bs-toggle="modal"
+            data-bs-target="#seniors-modal">Seniors</button>
           <button class="pill-button" type="button" data-bs-toggle="modal"
             data-bs-target="#leadership-modal">Leadership</button>
         </div>
@@ -361,6 +364,43 @@
     </div>
   </div>
 
+  <div class="modal fade" id="seniors-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl seniors-modal-lg">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="seniors-modal-bar mb-3 pe-0">
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill seniors-modal-back"
+              data-bs-dismiss="modal" aria-label="Back">Back</button>
+          </div>
+          <div class="seniors-container">
+            <div class="p-4">
+              <h2 class="mb-4 text-center">Meet Our Seniors</h2>
+              <div id="seniors-grid-container" class="seniors-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="seniors-fullscreen-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="seniors-fullscreen-bar">
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill seniors-fullscreen-back"
+              id="seniors-fullscreen-back" aria-label="Back">Back</button>
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill seniors-fullscreen-close"
+              id="seniors-fullscreen-close" aria-label="Close">Close</button>
+          </div>
+          <div class="seniors-fullscreen-container">
+            <img id="fullscreen-senior-image" src="" alt="Senior">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Idle Screen -->
   <div id="idle-screen" class="idle-screen">
     <video id="idle-video" autoplay muted playsinline></video>
@@ -376,6 +416,7 @@
   <script src="./src/js/hash-routing.js"></script>
   <script src="./src/js/video-modal.js"></script>
   <script src="./src/js/social-modal.js"></script>
+  <script src="./src/js/seniors-modal.js"></script>
   <script src="./src/js/our-robot.js"></script>
   <script src="./src/js/main.js"></script>
   <script src="./src/js/idle-screen.js"></script>
