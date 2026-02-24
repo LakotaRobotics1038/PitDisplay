@@ -59,6 +59,7 @@
   font-size: clamp(28px, 3vw, 48px);
   margin: 0;
   font-weight: bold;
+  color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   background: transparent;
   border: none;
