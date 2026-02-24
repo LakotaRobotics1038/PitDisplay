@@ -38,6 +38,7 @@ const initSeniorsModal = () => {
     seniorImages.forEach((senior) => {
       const button = document.createElement('button');
       button.className = 'senior-image-btn';
+      button.type = 'button';
       button.setAttribute('aria-label', `View ${senior.name}`);
 
       const img = document.createElement('img');
@@ -45,9 +46,17 @@ const initSeniorsModal = () => {
       img.alt = senior.name;
 
       button.appendChild(img);
-      button.addEventListener('click', () => {
+
+      const openHandler = (event) => {
+        if (event.type === 'touchend') {
+          event.preventDefault();
+        }
         openFullscreenImage(senior.path, senior.name);
-      });
+      };
+
+      button.addEventListener('click', openHandler);
+      button.addEventListener('touchend', openHandler, { passive: false });
+      button.addEventListener('pointerup', openHandler);
 
       seniorGridContainer.appendChild(button);
     });
