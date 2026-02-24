@@ -14,6 +14,8 @@ const updateNavOffset = () => {
 	document.documentElement.style.setProperty("--section-footer-height", `${footerHeight}px`);
 };
 
+window.updateNavOffset = updateNavOffset;
+
 window.addEventListener('resize', updateNavOffset);
 window.addEventListener('hashchange', updateNavOffset);
 

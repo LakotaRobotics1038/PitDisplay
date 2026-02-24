@@ -55,6 +55,7 @@ window.switchSection = (sectionName) => {
     requestAnimationFrame(() => {
       targetSection.classList.remove("from-left", "from-right");
       targetSection.classList.add("active");
+      window.updateNavOffset?.();
     });
   }
 };

@@ -95,6 +95,9 @@ class IdleScreenManager {
     // Show the idle screen
     this.idleScreen.classList.add('active');
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      window.updateNavOffset?.();
+    });
   }
 
   hideIdleScreen() {
@@ -104,6 +107,10 @@ class IdleScreenManager {
 
     // Pause the video
     this.idleVideo.pause();
+
+    requestAnimationFrame(() => {
+      window.updateNavOffset?.();
+    });
 
     // Reset the idle timer
     this.resetIdleTimer();
