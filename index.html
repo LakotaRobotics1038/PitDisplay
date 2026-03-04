@@ -72,16 +72,16 @@
 
     <div class="section" id="robot-section">
       <div class="section-body">
-        <div class="row">
+        <div class="row mb-auto">
           <div class="col">
-            <img style="max-height: 300px;" src="./src/img/our-robot/WesCavator.png" alt="WesCavator" />
+            <img style="max-height: 240px;" src="./src/img/our-robot/WesCavator.png" alt="WesCavator" />
           </div>
           <div class="col">
             <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
-              <button class="btn btn-primary btn-lg rounded-pill w-100">
+              <button class="toggle-section btn btn-primary btn-lg rounded-pill w-100" data-target="robot-specs">
                 Data & Specs
               </button>
-              <button class="btn btn-primary btn-lg rounded-pill w-100">
+              <button class="toggle-section btn btn-primary btn-lg rounded-pill w-100" data-target="robot-strategy">
                 Game Strategy
               </button>
               <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
@@ -89,7 +89,46 @@
             </div>
           </div>
         </div>
-        <div class="robot-container">
+        <div class="mb-auto">
+          <div id="robot-specs" class="text-container d-none">
+            <ul class="mb-0">
+              <li>Driver/Operator Experience</li>
+              <li>24x24 inch base</li>
+              <li>Swerve Drive Base</li>
+              <li>Hang at L1</li>
+              <li>Preload 8</li>
+              <li><i>TBD seconds to intake</i></li>
+              <li><i>TBD BPM</i></li>
+              <li><i>TBD Cycle Time</i></li>
+              <li>Passing Ability</li>
+              <li>Defense Capability</li>
+            </ul>
+          </div>
+          <div id="robot-strategy" class="text-container d-none">
+            <span><i>Strategy Goes Here</i></span>
+          </div>
+          <div id="robot-shooters" class="text-container d-none">
+            <ul>
+              <li>Dual-shooters</li>
+              <li><i>TDB balls/sec total</i></li>
+              <li>Variable Launch Angle w/ Variable Speed</li>
+              <li>2 Motors + Flywheel Per Shooter</li>
+            </ul>
+          </div>
+          <div id="robot-climb" class="text-container d-none">
+            <span><i>Climb Details Go Here</i></span>
+          </div>
+          <div id="robot-drive" class="text-container d-none">
+            <span><i>Drive Details Go Here</i></span>
+          </div>
+          <div id="robot-hopper" class="text-container d-none">
+            <span><i>Hopper Details Go Here</i></span>
+          </div>
+          <div id="robot-acquisition" class="text-container d-none">
+            <span><i>Acquisition Details Go Here</i></span>
+          </div>
+        </div>
+        <div class="robot-container mb-auto">
           <img src="./src/img/our-robot/Full Robot.png" alt="2026 Robot" class="robot-image"
             data-full-robot="./src/img/our-robot/Full Robot.png">
           <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">

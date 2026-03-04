@@ -3,7 +3,7 @@
   .robot-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@
     right: 20px;
     z-index: 30;
     padding: 12px 24px;
-    background: rgba(124, 81, 161, 0.9);
+    background: #7c51a1;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50px;
     color: white;
@@ -47,7 +47,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(124, 81, 161, 1);
+      background: #7c51a1;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
       transform: scale(1.05);
     }
@@ -73,6 +73,12 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
     }
 
+    &.active {
+      background: #0095da;
+      border-color: #7c51a1;
+      box-shadow: 0 0 20px rgba(0, 149, 218, 0.5);
+    }
+
     .label-name {
       font-size: 22px;
       font-weight: 600;
@@ -89,7 +95,7 @@
   /* Position each label around the robot */
   .robot-label-hopper {
     left: 5%;
-    top: 47%;
+    top: 40%;
     transform: translateY(-50%);
 
     &:hover {
@@ -99,7 +105,7 @@
 
   .robot-label-climb {
     left: 64%;
-    top: 25%;
+    top: 0%;
     transform: translateX(-50%);
 
     &:hover {
@@ -109,7 +115,7 @@
 
   .robot-label-shooters {
     left: 25%;
-    top: 27%;
+    top: 10%;
     transform: translateY(-50%);
 
     &:hover {
@@ -119,7 +125,7 @@
 
   .robot-label-drivetrain {
     right: 8%;
-    bottom: 35%;
+    bottom: 20%;
     transform: none;
 
     &:hover {
@@ -129,11 +135,37 @@
 
   .robot-label-acquisition {
     left: 50%;
-    bottom: 27%;
+    bottom: 6%;
     transform: translateX(-50%);
 
     &:hover {
       transform: translateX(-50%) scale(1.1);
+    }
+  }
+
+  /* Toggle section button active state */
+  .toggle-section.active {
+    background-color: #0095da !important;
+    border-color: #7c51a1 !important;
+    border-width: 3px !important;
+    box-shadow: 0 0 20px rgba(0, 149, 218, 0.5);
+  }
+
+  /* Text container fade transitions */
+  .text-container {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+
+    &.fade-out {
+      opacity: 0;
+    }
+
+    &.fade-in {
+      opacity: 1;
+    }
+
+    &.d-none {
+      display: none;
     }
   }
 }
