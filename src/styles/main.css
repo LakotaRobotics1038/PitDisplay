@@ -89,6 +89,10 @@ header {
   pointer-events: none;
 }
 
+ul {
+  margin-bottom: 0;
+}
+
 /* Header Logo */
 
 .header-logo {
