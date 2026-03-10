@@ -1,0 +1,9 @@
+#fll-section {
+  .row.text-center > .col {
+    background: #003b73;
+    border: 3px solid #ffffff;
+    border-radius: 18px;
+    padding: 16px;
+    margin: 0 1rem;
+  }
+}
