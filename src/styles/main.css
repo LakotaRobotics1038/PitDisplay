@@ -2,6 +2,12 @@
 * {
   font-family: 'Sora', sans-serif;
   box-sizing: border-box;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+img {
+  pointer-events: none;
 }
 
 html {

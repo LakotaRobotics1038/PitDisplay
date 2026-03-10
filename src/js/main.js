@@ -1,3 +1,5 @@
+document.addEventListener('dragstart', (e) => e.preventDefault());
+
 const nav = document.querySelector(".section-nav");
 
 const updateNavOffset = () => {
