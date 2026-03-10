@@ -1,7 +1,7 @@
 #about-section {
   .our-team-toolbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
   }
