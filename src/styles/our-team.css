@@ -2,6 +2,8 @@
   .our-team-toolbar {
     display: flex;
     justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .team-card {
@@ -45,6 +47,100 @@
 
   .team-text p:not(:last-child) {
     margin-bottom: 2rem;
+  }
+}
+
+#woodie-flowers-modal {
+  .modal-dialog {
+    max-width: min(1440px, calc(100vw - 32px));
+    width: calc(100vw - 32px);
+    margin: 20px auto;
+  }
+
+  .modal-content {
+    background: transparent;
+    border: none;
+    max-height: calc(100vh - 40px);
+  }
+
+  .modal-body {
+    overflow: hidden;
+  }
+
+  .woodie-flowers-container {
+    border-radius: 20px;
+    background: linear-gradient(160deg, #05213f 0%, #0a3a67 45%, #0b4f88 100%);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.45);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+
+  h2 {
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+
+  .woodie-flowers-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: stretch;
+  }
+
+  .woodie-flowers-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    min-height: 100%;
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .woodie-flowers-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .woodie-flowers-card h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .woodie-flowers-meta {
+    margin: 0;
+    opacity: 0.95;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .woodie-flowers-card-nominee {
+    border-style: dashed;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  @media (max-width: 768px) {
+    .modal-dialog {
+      width: calc(100vw - 20px);
+      max-width: calc(100vw - 20px);
+      margin: 10px auto;
+    }
+
+    .woodie-flowers-container {
+      max-height: calc(100vh - 90px);
+    }
+
+    .woodie-flowers-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
