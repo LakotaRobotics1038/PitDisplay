@@ -45,7 +45,6 @@
   aspect-ratio: 3/4;
 }
 
-.senior-image-btn:hover,
 .senior-image-btn:focus {
   transform: scale(1.05);
   outline: none;
