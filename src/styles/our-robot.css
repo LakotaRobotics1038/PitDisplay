@@ -26,6 +26,10 @@
     &.fade-in {
       opacity: 1;
     }
+
+    &.no-fade {
+      transition: none;
+    }
   }
 
   .robot-image-overlay {
@@ -40,6 +44,10 @@
 
     &.overlay-visible {
       opacity: 1;
+    }
+
+    &.overlay-handoff-out {
+      opacity: 0;
     }
   }
 

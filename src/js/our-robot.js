@@ -14,17 +14,33 @@ const subsystemImages = {
 
 const ROBOT_FADE_IN_MS = 300;
 const ROBOT_FADE_OUT_MS = 300;
+const ROBOT_OVERLAY_FADE_OUT_MS = 120;
 let robotTransitionToken = 0;
+
+const resolveImageUrl = (src) => {
+	if (!src) return "";
+	try {
+		return new URL(src, document.baseURI).href;
+	} catch {
+		return src;
+	}
+};
 
 const transitionImage = (newSrc) => {
 	if (!robotImage) return;
-	if (!newSrc || robotImage.src.endsWith(newSrc.replace("./", ""))) return;
+	if (!newSrc) return;
+
+	const currentSrc = resolveImageUrl(robotImage.currentSrc || robotImage.src);
+	const nextSrc = resolveImageUrl(newSrc);
+	if (currentSrc === nextSrc) return;
 
 	const container = robotImage.closest(".robot-container");
 	if (!container) {
 		robotImage.src = newSrc;
 		return;
 	}
+
+	container.querySelectorAll(".robot-image-overlay").forEach((overlay) => overlay.remove());
 
 	const transitionToken = ++robotTransitionToken;
 	const incomingImage = document.createElement("img");
@@ -55,9 +71,33 @@ const transitionImage = (newSrc) => {
 			}
 
 			robotImage.src = newSrc;
-			robotImage.classList.remove("fade-out");
-			robotImage.classList.add("fade-in");
-			incomingImage.remove();
+
+			const completeHandoff = () => {
+				if (transitionToken !== robotTransitionToken) {
+					incomingImage.remove();
+					return;
+				}
+
+				// Reveal the updated base image immediately before removing overlay.
+				robotImage.classList.add("no-fade");
+				robotImage.classList.remove("fade-out");
+				robotImage.classList.add("fade-in");
+				void robotImage.offsetWidth;
+				robotImage.classList.remove("no-fade");
+
+				incomingImage.classList.add("overlay-handoff-out");
+				setTimeout(() => {
+					if (transitionToken === robotTransitionToken) {
+						incomingImage.remove();
+					}
+				}, ROBOT_OVERLAY_FADE_OUT_MS);
+			};
+
+			if (typeof robotImage.decode === "function") {
+				robotImage.decode().catch(() => {}).finally(completeHandoff);
+			} else {
+				requestAnimationFrame(completeHandoff);
+			}
 		}, ROBOT_FADE_OUT_MS);
 	}, ROBOT_FADE_IN_MS);
 };
