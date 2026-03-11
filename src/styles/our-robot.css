@@ -11,8 +11,8 @@
   }
 
   .robot-image {
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     object-position: center;
     z-index: 1;
@@ -94,8 +94,8 @@
 
   /* Position each label around the robot */
   .robot-label-hopper {
-    left: 5%;
-    top: 40%;
+    left: 2%;
+    top: 30%;
     transform: translateY(-50%);
 
     &:hover {
@@ -105,7 +105,7 @@
 
   .robot-label-climb {
     left: 64%;
-    top: 0%;
+    top: 2%;
     transform: translateX(-50%);
 
     &:hover {
@@ -114,8 +114,8 @@
   }
 
   .robot-label-shooters {
-    left: 25%;
-    top: 10%;
+    left: 22%;
+    top: 7%;
     transform: translateY(-50%);
 
     &:hover {
@@ -125,7 +125,7 @@
 
   .robot-label-drivetrain {
     right: 8%;
-    bottom: 20%;
+    bottom: 11%;
     transform: none;
 
     &:hover {
@@ -134,8 +134,8 @@
   }
 
   .robot-label-acquisition {
-    left: 50%;
-    bottom: 6%;
+    left: 30%;
+    bottom: 1%;
     transform: translateX(-50%);
 
     &:hover {

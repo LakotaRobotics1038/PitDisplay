@@ -8,7 +8,7 @@ const subsystemImages = {
 	hopper: "./src/img/our-robot/Robot Hopper.png",
 	climb: "./src/img/our-robot/Robot Climb.png",
 	shooters: "./src/img/our-robot/Robot Shooter.png",
-	drivetrain: "./src/img/our-robot/Robot Drive train.png",
+	drivetrain: "./src/img/our-robot/Robot Base.png",
 	acquisition: "./src/img/our-robot/Robot Acquisition.png"
 };
 
