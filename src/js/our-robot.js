@@ -12,20 +12,54 @@ const subsystemImages = {
 	acquisition: "./src/img/our-robot/Robot Acquisition.png"
 };
 
+const ROBOT_FADE_IN_MS = 300;
+const ROBOT_FADE_OUT_MS = 300;
+let robotTransitionToken = 0;
+
 const transitionImage = (newSrc) => {
 	if (!robotImage) return;
+	if (!newSrc || robotImage.src.endsWith(newSrc.replace("./", ""))) return;
 
-	// Fade out
-	robotImage.classList.remove("fade-in");
-	robotImage.classList.add("fade-out");
-
-	// Change image after fade out completes
-	setTimeout(() => {
+	const container = robotImage.closest(".robot-container");
+	if (!container) {
 		robotImage.src = newSrc;
-		// Fade in
-		robotImage.classList.remove("fade-out");
-		robotImage.classList.add("fade-in");
-	}, 300);
+		return;
+	}
+
+	const transitionToken = ++robotTransitionToken;
+	const incomingImage = document.createElement("img");
+	incomingImage.src = newSrc;
+	incomingImage.alt = robotImage.alt;
+	incomingImage.className = "robot-image robot-image-overlay";
+
+	container.appendChild(incomingImage);
+
+	requestAnimationFrame(() => {
+		if (transitionToken !== robotTransitionToken) return;
+		incomingImage.classList.add("overlay-visible");
+	});
+
+	setTimeout(() => {
+		if (transitionToken !== robotTransitionToken) {
+			incomingImage.remove();
+			return;
+		}
+
+		robotImage.classList.remove("fade-in");
+		robotImage.classList.add("fade-out");
+
+		setTimeout(() => {
+			if (transitionToken !== robotTransitionToken) {
+				incomingImage.remove();
+				return;
+			}
+
+			robotImage.src = newSrc;
+			robotImage.classList.remove("fade-out");
+			robotImage.classList.add("fade-in");
+			incomingImage.remove();
+		}, ROBOT_FADE_OUT_MS);
+	}, ROBOT_FADE_IN_MS);
 };
 
 // Fade transition helpers for text sections
