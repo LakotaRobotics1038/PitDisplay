@@ -27,79 +27,86 @@ const resolveImageUrl = (src) => {
 };
 
 const transitionImage = (newSrc) => {
-	if (!robotImage) return;
-	if (!newSrc) return;
+	return new Promise((resolve) => {
+		if (!robotImage || !newSrc) { resolve(); return; }
 
-	const currentSrc = resolveImageUrl(robotImage.currentSrc || robotImage.src);
-	const nextSrc = resolveImageUrl(newSrc);
-	if (currentSrc === nextSrc) return;
+		const currentSrc = resolveImageUrl(robotImage.currentSrc || robotImage.src);
+		const nextSrc = resolveImageUrl(newSrc);
+		if (currentSrc === nextSrc) { resolve(); return; }
 
-	const container = robotImage.closest(".robot-container");
-	if (!container) {
-		robotImage.src = newSrc;
-		return;
-	}
-
-	container.querySelectorAll(".robot-image-overlay").forEach((overlay) => overlay.remove());
-
-	const transitionToken = ++robotTransitionToken;
-	const incomingImage = document.createElement("img");
-	incomingImage.src = newSrc;
-	incomingImage.alt = robotImage.alt;
-	incomingImage.className = "robot-image robot-image-overlay";
-
-	container.appendChild(incomingImage);
-
-	requestAnimationFrame(() => {
-		if (transitionToken !== robotTransitionToken) return;
-		incomingImage.classList.add("overlay-visible");
-	});
-
-	setTimeout(() => {
-		if (transitionToken !== robotTransitionToken) {
-			incomingImage.remove();
+		const container = robotImage.closest(".robot-container");
+		if (!container) {
+			robotImage.src = newSrc;
+			resolve();
 			return;
 		}
 
-		robotImage.classList.remove("fade-in");
-		robotImage.classList.add("fade-out");
+		container.querySelectorAll(".robot-image-overlay").forEach((overlay) => overlay.remove());
+
+		const transitionToken = ++robotTransitionToken;
+		const incomingImage = document.createElement("img");
+		incomingImage.src = newSrc;
+		incomingImage.alt = robotImage.alt;
+		incomingImage.className = "robot-image robot-image-overlay";
+
+		container.appendChild(incomingImage);
+
+		requestAnimationFrame(() => {
+			if (transitionToken !== robotTransitionToken) { resolve(); return; }
+			incomingImage.classList.add("overlay-visible");
+		});
 
 		setTimeout(() => {
 			if (transitionToken !== robotTransitionToken) {
 				incomingImage.remove();
+				resolve();
 				return;
 			}
 
-			robotImage.src = newSrc;
+			robotImage.classList.remove("fade-in");
+			robotImage.classList.add("fade-out");
 
-			const completeHandoff = () => {
+			setTimeout(() => {
 				if (transitionToken !== robotTransitionToken) {
 					incomingImage.remove();
+					resolve();
 					return;
 				}
 
-				// Reveal the updated base image immediately before removing overlay.
-				robotImage.classList.add("no-fade");
-				robotImage.classList.remove("fade-out");
-				robotImage.classList.add("fade-in");
-				void robotImage.offsetWidth;
-				robotImage.classList.remove("no-fade");
+				robotImage.src = newSrc;
 
-				incomingImage.classList.add("overlay-handoff-out");
-				setTimeout(() => {
-					if (transitionToken === robotTransitionToken) {
+				const completeHandoff = () => {
+					if (transitionToken !== robotTransitionToken) {
 						incomingImage.remove();
+						resolve();
+						return;
 					}
-				}, ROBOT_OVERLAY_FADE_OUT_MS);
-			};
 
-			if (typeof robotImage.decode === "function") {
-				robotImage.decode().catch(() => {}).finally(completeHandoff);
-			} else {
-				requestAnimationFrame(completeHandoff);
-			}
-		}, ROBOT_FADE_OUT_MS);
-	}, ROBOT_FADE_IN_MS);
+					// Reveal the updated base image immediately before removing overlay.
+					robotImage.classList.add("no-fade");
+					robotImage.classList.remove("fade-out");
+					robotImage.classList.add("fade-in");
+					void robotImage.offsetWidth;
+					robotImage.classList.remove("no-fade");
+
+					incomingImage.classList.add("overlay-handoff-out");
+					setTimeout(() => {
+						if (transitionToken === robotTransitionToken) {
+							incomingImage.remove();
+						}
+					}, ROBOT_OVERLAY_FADE_OUT_MS);
+
+					resolve();
+				};
+
+				if (typeof robotImage.decode === "function") {
+					robotImage.decode().catch(() => {}).finally(completeHandoff);
+				} else {
+					requestAnimationFrame(completeHandoff);
+				}
+			}, ROBOT_FADE_OUT_MS);
+		}, ROBOT_FADE_IN_MS);
+	});
 };
 
 // Fade transition helpers for text sections
@@ -116,12 +123,15 @@ const fadeOutSection = (section) => {
 };
 
 const fadeInSection = (section) => {
+	// Start at opacity 0 before making visible so the transition plays
+	section.classList.add("fade-out");
+	section.classList.remove("fade-in");
 	section.classList.remove("d-none");
-	section.classList.remove("fade-out");
 
-	// Force reflow to ensure the transition works
+	// Force reflow so the browser registers opacity: 0 before transitioning
 	void section.offsetWidth;
 
+	section.classList.remove("fade-out");
 	section.classList.add("fade-in");
 };
 
@@ -161,7 +171,6 @@ robotLabels.forEach((label) => {
 		const newSrc = subsystemImages[component];
 
 		if (newSrc) {
-			transitionImage(newSrc);
 			// Show reset button
 			if (robotResetBtn) {
 				robotResetBtn.style.display = "flex";
@@ -172,11 +181,14 @@ robotLabels.forEach((label) => {
 			if (textSectionId) {
 				const textSection = document.getElementById(textSectionId);
 				if (textSection) {
-					// Fade out all other visible sections first
-				const robotSection = document.getElementById("robot-section");
-				const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
-					(section) => !section.classList.contains("d-none")
-				);
+					// Wait for robot image transition to complete first
+					await transitionImage(newSrc);
+
+					// Fade out all other visible sections
+					const robotSection = document.getElementById("robot-section");
+					const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
+						(section) => !section.classList.contains("d-none")
+					);
 
 					await Promise.all(visibleSections.map((section) => fadeOutSection(section)));
 
@@ -212,16 +224,6 @@ toggleButtons.forEach((button) => {
 
 		if (!targetSection) return;
 
-		// Reset robot image to full view when toggle button is clicked
-		if (fullRobotSrc) {
-			transitionImage(fullRobotSrc);
-			if (robotResetBtn) {
-				robotResetBtn.style.display = "none";
-			}
-			// Remove active state from robot labels
-			robotLabels.forEach((label) => label.classList.remove("active"));
-		}
-
 		// Check if the section is currently visible
 		const isVisible = !targetSection.classList.contains("d-none");
 
@@ -237,6 +239,16 @@ toggleButtons.forEach((button) => {
 			);
 
 			await Promise.all(visibleSections.map((section) => fadeOutSection(section)));
+
+			// Reset robot image to full view, wait for it to complete
+			if (fullRobotSrc) {
+				await transitionImage(fullRobotSrc);
+				if (robotResetBtn) {
+					robotResetBtn.style.display = "none";
+				}
+				// Remove active state from robot labels
+				robotLabels.forEach((label) => label.classList.remove("active"));
+			}
 
 			// Remove active state from all buttons
 			toggleButtons.forEach((btn) => btn.classList.remove("active"));
