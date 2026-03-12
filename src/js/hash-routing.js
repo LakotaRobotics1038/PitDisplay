@@ -1,7 +1,7 @@
 const sectionBtns = document.querySelectorAll(".section-btn");
 const sections = document.querySelectorAll(".section");
 
-const sectionOrder = ["home", "robot", "about", "fll", "pgsc", "impact", "sponsors"];
+const sectionOrder = ["home", "robot", "about", "scouting", "fll", "pgsc", "impact", "sponsors"];
 
 // Make switchSection globally available
 window.switchSection = (sectionName) => {
