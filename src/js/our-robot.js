@@ -175,6 +175,8 @@ robotLabels.forEach((label) => {
 					// Fade out all other visible sections first
 				const robotSection = document.getElementById("robot-section");
 				const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
+					(section) => !section.classList.contains("d-none")
+				);
 
 					await Promise.all(visibleSections.map((section) => fadeOutSection(section)));
 
@@ -229,7 +231,8 @@ toggleButtons.forEach((button) => {
 			button.classList.remove("active");
 		} else {
 			// Fade out all other visible sections first
-			const visibleSections = Array.from(document.querySelectorAll(".text-container")).filter(
+			const robotSection = document.getElementById("robot-section");
+			const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
 				(section) => !section.classList.contains("d-none")
 			);
 
