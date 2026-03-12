@@ -133,7 +133,8 @@ const resetRobotSection = async () => {
 	}
 
 	// Hide any visible text sections
-	const visibleSections = Array.from(document.querySelectorAll(".text-container")).filter(
+	const robotSection = document.getElementById("robot-section");
+	const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
 		(section) => !section.classList.contains("d-none")
 	);
 
@@ -172,9 +173,8 @@ robotLabels.forEach((label) => {
 				const textSection = document.getElementById(textSectionId);
 				if (textSection) {
 					// Fade out all other visible sections first
-					const visibleSections = Array.from(document.querySelectorAll(".text-container")).filter(
-						(section) => !section.classList.contains("d-none")
-					);
+				const robotSection = document.getElementById("robot-section");
+				const visibleSections = Array.from(robotSection?.querySelectorAll(".text-container") ?? []).filter(
 
 					await Promise.all(visibleSections.map((section) => fadeOutSection(section)));
 
