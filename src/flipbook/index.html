@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>IMPACT Report Flipbook</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #0b0b0b;
+      color: #fff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .topbar,
+    .bottombar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .bottombar {
+      border-bottom: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .meta {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      min-width: 120px;
+      text-align: right;
+    }
+
+    .viewer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .book-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 2px 4px;
+    }
+
+    #flipbook {
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+    }
+
+    #flipbook .page {
+      background: #111;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .tap-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 30%;
+      z-index: 40;
+    }
+
+    .tap-zone.left {
+      left: 0;
+    }
+
+    .tap-zone.right {
+      right: 0;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    button {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      min-width: 78px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      width: 100%;
+      accent-color: #7c51a1;
+    }
+
+    .loader {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, 0.36);
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .loader.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="title">IMPACT Report Flipbook</div>
+    <div id="page-indicator" class="meta">Page 1 / 56</div>
+  </div>
+
+  <main class="viewer" id="viewer">
+    <div class="book-stage" id="book-stage">
+      <div class="tap-zone left" id="tap-prev" aria-hidden="true"></div>
+      <div class="tap-zone right" id="tap-next" aria-hidden="true"></div>
+      <div id="flipbook" aria-label="IMPACT Report flipbook pages"></div>
+    </div>
+    <div id="loader" class="loader">Loading page…</div>
+  </main>
+
+  <div class="bottombar">
+    <div class="controls">
+      <button id="prev-btn" type="button">Prev</button>
+      <input id="page-slider" type="range" min="1" max="56" step="1" value="1" />
+      <button id="next-btn" type="button">Next</button>
+    </div>
+  </div>
+
+  <script src="./vendor/jquery.min.js"></script>
+  <script src="./vendor/turn.min.js"></script>
+  <script>
+    const TOTAL_PAGES = 56;
+    const BOOK_WIDTH = 1000;
+    let BOOK_HEIGHT = 650;
+    let currentPage = 1;
+
+    const pageIndicator = document.getElementById("page-indicator");
+    const pageSlider = document.getElementById("page-slider");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const tapPrev = document.getElementById("tap-prev");
+    const tapNext = document.getElementById("tap-next");
+    const loader = document.getElementById("loader");
+    const viewer = document.getElementById("viewer");
+    const flipbook = document.getElementById("flipbook");
+    const $flipbook = window.jQuery("#flipbook");
+
+    const pagePath = (page) => `./pages/page-${String(page - 1).padStart(3, "0")}.jpg`;
+
+    const loadScript = (src, onLoad, onError) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = onLoad;
+      script.onerror = onError;
+      document.head.appendChild(script);
+    };
+
+    const loadTurnEngine = (onReady) => {
+      if (window.jQuery && typeof window.jQuery.fn.turn === "function") {
+        onReady();
+        return;
+      }
+
+      loadScript(
+        "./turnjs4/lib/turn.min.js",
+        () => {
+          if (window.jQuery && typeof window.jQuery.fn.turn === "function") {
+            onReady();
+            return;
+          }
+
+          loadScript(
+            "./turnjs4/lib/turn.html4.min.js",
+            () => {
+              if (window.jQuery && typeof window.jQuery.fn.turn === "function") {
+                onReady();
+              } else {
+                loader.textContent = "Unable to initialize flipbook engine.";
+              }
+            },
+            () => {
+              loader.textContent = "Unable to initialize flipbook engine.";
+            }
+          );
+        },
+        () => {
+          loader.textContent = "Unable to initialize flipbook engine.";
+        }
+      );
+    };
+
+    const buildPages = () => {
+      const fragment = document.createDocumentFragment();
+      for (let page = 1; page <= TOTAL_PAGES; page += 1) {
+        const pageNode = document.createElement("div");
+        pageNode.className = "page";
+        pageNode.style.backgroundImage = `url('${pagePath(page)}')`;
+        fragment.appendChild(pageNode);
+      }
+      flipbook.appendChild(fragment);
+    };
+
+    const getCurrentView = () => {
+      const view = $flipbook.turn("view");
+      if (!Array.isArray(view) || view.length < 2) {
+        return [currentPage, currentPage];
+      }
+      return [view[0] || currentPage, view[1] || currentPage];
+    };
+
+    const updateUi = () => {
+      const [left, right] = getCurrentView();
+      if (left === right || left === 1 || right === TOTAL_PAGES) {
+        const singlePage = left === 1 ? 1 : right === TOTAL_PAGES ? TOTAL_PAGES : currentPage;
+        pageIndicator.textContent = `Page ${singlePage} / ${TOTAL_PAGES}`;
+      } else {
+        pageIndicator.textContent = `Pages ${left}-${right} / ${TOTAL_PAGES}`;
+      }
+
+      pageSlider.value = String(currentPage);
+      prevBtn.disabled = left <= 1;
+      nextBtn.disabled = right >= TOTAL_PAGES;
+    };
+
+    const goToPage = (page) => {
+      const target = Math.max(1, Math.min(TOTAL_PAGES, page));
+      if (target === currentPage) return;
+      $flipbook.turn("page", target);
+    };
+
+    const fitFlipbookToViewer = () => {
+      if (typeof $flipbook.turn !== "function") return;
+
+      const horizontalPadding = 6;
+      const verticalPadding = 10;
+
+      const availableWidth = Math.max(320, viewer.clientWidth - horizontalPadding);
+      const availableHeight = Math.max(220, viewer.clientHeight - verticalPadding);
+
+      const scale = Math.min(1, availableWidth / BOOK_WIDTH, availableHeight / BOOK_HEIGHT);
+      const fittedWidth = Math.max(320, Math.floor(BOOK_WIDTH * scale));
+      const fittedHeight = Math.max(220, Math.floor(BOOK_HEIGHT * scale));
+
+      $flipbook.turn("size", fittedWidth, fittedHeight);
+      $flipbook.turn("center");
+    };
+
+    const init = () => {
+      loader.classList.add("show");
+
+      const firstImage = new Image();
+      firstImage.onload = () => {
+        const ratio = firstImage.naturalWidth / firstImage.naturalHeight || 0.77;
+        BOOK_HEIGHT = Math.round(BOOK_WIDTH / (ratio * 2));
+
+        flipbook.style.width = `${BOOK_WIDTH}px`;
+        flipbook.style.height = `${BOOK_HEIGHT}px`;
+
+        buildPages();
+
+        loadTurnEngine(() => {
+          if (typeof $flipbook.turn !== "function") {
+            loader.textContent = "Unable to initialize flipbook engine.";
+            return;
+          }
+
+          $flipbook.turn({
+            width: BOOK_WIDTH,
+            height: BOOK_HEIGHT,
+            display: "double",
+            autoCenter: true,
+            elevation: 50,
+            gradients: true,
+            acceleration: true,
+            duration: 420,
+            page: 1,
+            when: {
+              turned: (_, page) => {
+                currentPage = page;
+                updateUi();
+              }
+            }
+          });
+
+          $flipbook.turn("display", "double");
+          fitFlipbookToViewer();
+          currentPage = 1;
+          updateUi();
+          loader.classList.remove("show");
+
+          window.addEventListener("resize", fitFlipbookToViewer);
+        });
+      };
+
+      firstImage.onerror = () => {
+        loader.textContent = "Unable to load flipbook pages.";
+      };
+
+      firstImage.src = pagePath(1);
+    };
+
+    prevBtn.addEventListener("click", () => $flipbook.turn("previous"));
+    nextBtn.addEventListener("click", () => $flipbook.turn("next"));
+
+    pageSlider.addEventListener("input", () => {
+      const requestedPage = Number(pageSlider.value);
+      goToPage(requestedPage);
+    });
+
+    tapPrev.addEventListener("click", () => $flipbook.turn("previous"));
+    tapNext.addEventListener("click", () => $flipbook.turn("next"));
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        $flipbook.turn("previous");
+      }
+      if (event.key === "ArrowRight") {
+        $flipbook.turn("next");
+      }
+    });
+
+    init();
+  </script>
+</body>
+
+</html>

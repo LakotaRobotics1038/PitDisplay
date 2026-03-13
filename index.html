@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./src/styles/bootstrap-overrides.css">
   <link rel="stylesheet" href="./src/styles/main.css">
   <link rel="stylesheet" href="./src/styles/video-modal.css">
+  <link rel="stylesheet" href="./src/styles/flipbook-modal.css">
   <link rel="stylesheet" href="./src/styles/social-modal.css">
   <link rel="stylesheet" href="./src/styles/seniors-modal.css">
   <link rel="stylesheet" href="./src/styles/home.css">
@@ -356,9 +357,13 @@
     <div class="section" id="impact-section">
       <img src="./src/img/impact/Impact Header.png" alt="Impact Header" class="section-header" />
       <div class="section-body">
-        <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
+        <div class="button-list d-flex justify-content-around gap-3">
           <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
             data-video="./src/videos/2026impactvideo.mp4">2026 Impact Video</button>
+          <button class="open-flipbook btn btn-primary btn-lg rounded-pill w-100"
+            data-flipbook-src="./src/flipbook/index.html">
+            2025 IMPACT Report
+          </button>
         </div>
         <h2>Expanding STEM Career Exposure & Resources</h2>
         <p>Lakota Robotics provides students with hands-on STEM experiences, industry partnerships, and career pathways
@@ -401,6 +406,22 @@
           </div>
           <div class="video-container">
             <video id="modal-video" autoplay muted playsinline loop></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade flipbook-modal" id="flipbook-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="video-modal-bar">
+            <button type="button" class="btn btn-outline-light btn-lg rounded-pill video-modal-back"
+              data-bs-dismiss="modal" aria-label="Back">Back</button>
+          </div>
+          <div class="flipbook-container">
+            <iframe id="flipbook-frame" title="IMPACT Report Flipbook" loading="lazy" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -557,6 +578,7 @@
   <script src="./src/lib/bootstrap.bundle.min.js"></script>
   <script src="./src/js/hash-routing.js"></script>
   <script src="./src/js/video-modal.js"></script>
+  <script src="./src/js/flipbook-modal.js"></script>
   <script src="./src/js/social-modal.js"></script>
   <script src="./src/js/seniors-modal.js"></script>
   <script src="./src/js/our-robot.js"></script>

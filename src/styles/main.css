@@ -309,8 +309,7 @@ ul {
 }
 
 .button-list {
-  width: 100%;
-  max-width: 600px;
+  width: 100% !important;
   margin: 0 auto;
 }
 
