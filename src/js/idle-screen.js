@@ -83,6 +83,8 @@ class IdleScreenManager {
       return;
     }
 
+    this.closeOpenModals();
+
     // Reset to home section
     if (typeof switchSection === 'function') {
       switchSection('home');
@@ -114,6 +116,16 @@ class IdleScreenManager {
 
     // Reset the idle timer
     this.resetIdleTimer();
+  }
+
+  closeOpenModals() {
+    if (!window.bootstrap) {
+      return;
+    }
+
+    document.querySelectorAll('.modal.show').forEach((modalEl) => {
+      bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+    });
   }
 
   playVideo(index) {
