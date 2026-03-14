@@ -33,16 +33,19 @@
 }
 
 .senior-image-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  border: none;
   cursor: pointer;
-  padding: 0;
-  background: none;
+  padding: 10px;
   transition: transform 0.2s ease;
   width: 100%;
+  border-radius: 12px;
   aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .senior-image-btn:focus {
@@ -51,7 +54,7 @@
 }
 
 .senior-image-btn img {
-  width: 100%;
+  width: fit-content;
   height: 100%;
   object-fit: contain;
   border-radius: 12px;

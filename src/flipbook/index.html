@@ -125,6 +125,11 @@
       font-size: 0.95rem;
       min-width: 78px;
       cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    button:hover:not(:disabled) {
+      transform: scale(1.05);
     }
 
     button:disabled {
