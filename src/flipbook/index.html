@@ -199,6 +199,7 @@
     const TOTAL_PAGES = Math.max(1, Number.parseInt(params.get("pages") || "56", 10) || 56);
     const PAGES_DIR = (params.get("dir") || "pages").replace(/^\.?\//, "").replace(/\/+$/, "");
     const SPLIT_LANDSCAPE = params.get("splitLandscape") === "true";
+    const LEAF_RATIO_OVERRIDE = Number.parseFloat(params.get("leafRatio") || "");
     const BOOK_WIDTH = 1000;
     let BOOK_HEIGHT = 650;
     let currentPage = 1;
@@ -419,6 +420,35 @@
       $flipbook.turn("center");
     };
 
+    const getMedianLeafAspectRatio = (images) => {
+      if (Number.isFinite(LEAF_RATIO_OVERRIDE) && LEAF_RATIO_OVERRIDE > 0) {
+        return LEAF_RATIO_OVERRIDE;
+      }
+
+      const leafRatios = images
+        .map(({ width, height }) => {
+          if (!width || !height) return null;
+          const shouldSplit = SPLIT_LANDSCAPE && width > height;
+          const leafWidth = shouldSplit ? width / 2 : width;
+          return leafWidth / height;
+        })
+        .filter((ratio) => Number.isFinite(ratio) && ratio > 0)
+        .sort((a, b) => a - b);
+
+      if (leafRatios.length === 0) return 0.77;
+
+      const middle = Math.floor(leafRatios.length / 2);
+      const medianRatio = leafRatios.length % 2 === 0
+        ? (leafRatios[middle - 1] + leafRatios[middle]) / 2
+        : leafRatios[middle];
+
+      if (SPLIT_LANDSCAPE && medianRatio < 0.72) {
+        return 0.77;
+      }
+
+      return medianRatio;
+    };
+
     const init = async () => {
       loader.classList.add("show");
 
@@ -427,11 +457,7 @@
           Array.from({ length: TOTAL_PAGES }, (_, index) => loadImageMeta(index + 1))
         );
 
-        const firstPage = images[0];
-        const firstLeafWidth = SPLIT_LANDSCAPE && firstPage.width > firstPage.height
-          ? firstPage.width / 2
-          : firstPage.width;
-        const ratio = firstLeafWidth / firstPage.height || 0.77;
+        const ratio = getMedianLeafAspectRatio(images);
         BOOK_HEIGHT = Math.round(BOOK_WIDTH / (ratio * 2));
 
         flipbook.style.width = `${BOOK_WIDTH}px`;
