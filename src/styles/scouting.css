@@ -1,0 +1,6 @@
+#scouting-section {
+  .row.row-cols-2 img {
+    height: var(--scouting-first-row-image-height, auto);
+    object-fit: contain;
+  }
+}
