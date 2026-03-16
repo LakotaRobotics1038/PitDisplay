@@ -26,7 +26,6 @@
   backdrop-filter: blur(10px);
 }
 
-.social-modal-back:hover,
 .social-modal-back:focus {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.6);

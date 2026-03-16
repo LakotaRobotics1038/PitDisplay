@@ -16,7 +16,6 @@
   backdrop-filter: blur(10px);
 }
 
-.video-modal-back:hover,
 .video-modal-back:focus {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.6);

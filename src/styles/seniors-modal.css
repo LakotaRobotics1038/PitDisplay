@@ -66,9 +66,7 @@
   backdrop-filter: blur(10px);
 }
 
-.seniors-modal-back:hover,
 .seniors-modal-back:focus,
-.seniors-modal-close:hover,
 .seniors-modal-close:focus {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.6);
@@ -113,9 +111,7 @@
   backdrop-filter: blur(10px);
 }
 
-.seniors-fullscreen-back:hover,
 .seniors-fullscreen-back:focus,
-.seniors-fullscreen-close:hover,
 .seniors-fullscreen-close:focus {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.6);

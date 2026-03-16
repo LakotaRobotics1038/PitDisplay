@@ -56,12 +56,6 @@
     gap: 8px;
     transition: all 0.3s ease;
 
-    &:hover {
-      background: #7c51a1;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-      transform: scale(1.05);
-    }
-
     &:active {
       transform: scale(0.95);
     }
@@ -77,11 +71,6 @@
     gap: 4px;
     z-index: 25;
     min-width: 140px;
-
-    &:hover {
-      background: rgba(124, 81, 161, 0.9);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-    }
 
     &.active {
       background: #0095da;
@@ -107,50 +96,30 @@
     left: 2%;
     top: 30%;
     transform: translateY(-50%);
-
-    &:hover {
-      transform: translateY(-50%) scale(1.1);
-    }
   }
 
   .robot-label-climb {
     left: 64%;
     top: 2%;
     transform: translateX(-50%);
-
-    &:hover {
-      transform: translateX(-50%) scale(1.1);
-    }
   }
 
   .robot-label-shooters {
     left: 22%;
     top: 7%;
     transform: translateY(-50%);
-
-    &:hover {
-      transform: translateY(-50%) scale(1.1);
-    }
   }
 
   .robot-label-drivetrain {
     right: 8%;
     bottom: 11%;
     transform: none;
-
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 
   .robot-label-acquisition {
     left: 30%;
     bottom: 1%;
     transform: translateX(-50%);
-
-    &:hover {
-      transform: translateX(-50%) scale(1.1);
-    }
   }
 
   /* Toggle section button active state */

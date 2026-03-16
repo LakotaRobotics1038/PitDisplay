@@ -168,7 +168,7 @@ ul {
   min-width: 175px;
 }
 
-.section-btn:hover {
+.section-btn:focus {
   background: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.9);
   transform: scale(1.05);
