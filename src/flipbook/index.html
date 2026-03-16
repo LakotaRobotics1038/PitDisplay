@@ -93,6 +93,33 @@
       justify-content: center;
     }
 
+    .split-half {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .split-half-image {
+      position: absolute;
+      top: 0;
+      width: 200%;
+      height: 100%;
+      max-width: none;
+      object-fit: fill;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .split-half.left .split-half-image {
+      left: 0;
+    }
+
+    .split-half.right .split-half-image {
+      left: -100%;
+    }
+
     .page-image {
       width: 100%;
       height: 100%;
@@ -292,6 +319,24 @@
       renderedPages = [];
       hasLeadingPaddingPage = false;
 
+      const createSplitPageNode = (page, side) => {
+        const pageNode = document.createElement("div");
+        pageNode.className = "page";
+
+        const splitHalf = document.createElement("div");
+        splitHalf.className = `split-half ${side}`;
+
+        const splitImage = document.createElement("img");
+        splitImage.className = "split-half-image";
+        splitImage.src = page.imagePath;
+        splitImage.alt = "";
+        splitImage.draggable = false;
+
+        splitHalf.appendChild(splitImage);
+        pageNode.appendChild(splitHalf);
+        return pageNode;
+      };
+
       if (SPLIT_LANDSCAPE && images.length > 0 && images[0].width > images[0].height) {
         const paddingPage = document.createElement("div");
         paddingPage.className = "page";
@@ -304,47 +349,12 @@
         const shouldSplit = SPLIT_LANDSCAPE && page.width > page.height;
 
         if (shouldSplit) {
-          const stage = document.createElement("div");
-          stage.style.position = "absolute";
-          stage.style.left = "-100000px";
-          stage.style.top = "0";
-          stage.style.visibility = "hidden";
-          stage.style.width = `${BOOK_WIDTH}px`;
-          stage.style.height = `${BOOK_HEIGHT}px`;
+          const leftPageNode = createSplitPageNode(page, "left");
+          const rightPageNode = createSplitPageNode(page, "right");
 
-          const spreadImage = document.createElement("img");
-          spreadImage.src = page.imagePath;
-          spreadImage.alt = "";
-          spreadImage.draggable = false;
-          spreadImage.style.display = "block";
-          spreadImage.style.width = `${BOOK_WIDTH}px`;
-          spreadImage.style.height = `${BOOK_HEIGHT}px`;
-
-          stage.appendChild(spreadImage);
-          document.body.appendChild(stage);
-          window.jQuery(spreadImage).scissor();
-
-          const wrappers = Array.from(stage.children);
-          wrappers.forEach((wrapper) => {
-            wrapper.style.width = "100%";
-            wrapper.style.height = "100%";
-
-            const innerImage = wrapper.querySelector("img");
-            if (innerImage) {
-              innerImage.classList.add("page-image");
-              innerImage.style.width = `${BOOK_WIDTH}px`;
-              innerImage.style.height = `${BOOK_HEIGHT}px`;
-              innerImage.style.maxWidth = "none";
-            }
-
-            const pageNode = document.createElement("div");
-            pageNode.className = "page";
-            pageNode.appendChild(wrapper);
-            fragment.appendChild(pageNode);
-            renderedPages.push({ imagePath: page.imagePath });
-          });
-
-          document.body.removeChild(stage);
+          fragment.appendChild(leftPageNode);
+          fragment.appendChild(rightPageNode);
+          renderedPages.push({ imagePath: page.imagePath }, { imagePath: page.imagePath });
           return;
         }
 
@@ -441,11 +451,6 @@
       const medianRatio = leafRatios.length % 2 === 0
         ? (leafRatios[middle - 1] + leafRatios[middle]) / 2
         : leafRatios[middle];
-
-      if (SPLIT_LANDSCAPE && medianRatio < 0.72) {
-        return 0.77;
-      }
-
       return medianRatio;
     };
 
