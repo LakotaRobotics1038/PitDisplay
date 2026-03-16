@@ -125,11 +125,6 @@ ul {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.social-icon-btn:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
-}
-
 .social-icon-btn:active {
   transform: scale(0.95);
 }
