@@ -10,9 +10,11 @@ if (flipbookModalEl && flipbookFrame && flipbookButtons.length > 0 && window.boo
   });
 
   let pendingFlipbookSrc = "";
+  let pendingFlipbookTitle = "";
 
   const clearFlipbookSource = () => {
     flipbookFrame.removeAttribute("src");
+    flipbookFrame.setAttribute("title", "Flipbook");
   };
 
   const openFlipbook = (button) => {
@@ -20,6 +22,7 @@ if (flipbookModalEl && flipbookFrame && flipbookButtons.length > 0 && window.boo
     if (!flipbookSrc) return;
 
     pendingFlipbookSrc = flipbookSrc;
+    pendingFlipbookTitle = button.getAttribute("data-flipbook-title") || "Flipbook";
     flipbookModal.show();
   };
 
@@ -31,6 +34,7 @@ if (flipbookModalEl && flipbookFrame && flipbookButtons.length > 0 && window.boo
 
   flipbookModalEl.addEventListener("shown.bs.modal", () => {
     if (!pendingFlipbookSrc) return;
+    flipbookFrame.setAttribute("title", pendingFlipbookTitle);
     if (flipbookFrame.getAttribute("src") !== pendingFlipbookSrc) {
       flipbookFrame.src = pendingFlipbookSrc;
     }
@@ -38,6 +42,7 @@ if (flipbookModalEl && flipbookFrame && flipbookButtons.length > 0 && window.boo
 
   flipbookModalEl.addEventListener("hidden.bs.modal", () => {
     pendingFlipbookSrc = "";
+    pendingFlipbookTitle = "";
     clearFlipbookSource();
   });
 }

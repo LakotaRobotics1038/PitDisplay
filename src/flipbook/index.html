@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>IMPACT Report Flipbook</title>
+  <title>Flipbook</title>
   <style>
     :root {
       color-scheme: dark;
@@ -87,10 +87,19 @@
     }
 
     #flipbook .page {
-      background: #111;
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      background-position: center center;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .tap-zone {
@@ -160,15 +169,15 @@
 
 <body>
   <div class="topbar">
-    <div class="title">IMPACT Report Flipbook</div>
-    <div id="page-indicator" class="meta">Page 1 / 56</div>
+    <div class="title" id="flipbook-title">Flipbook</div>
+    <div id="page-indicator" class="meta">Page 1 / 1</div>
   </div>
 
   <main class="viewer" id="viewer">
     <div class="book-stage" id="book-stage">
       <div class="tap-zone left" id="tap-prev" aria-hidden="true"></div>
       <div class="tap-zone right" id="tap-next" aria-hidden="true"></div>
-      <div id="flipbook" aria-label="IMPACT Report flipbook pages"></div>
+      <div id="flipbook" aria-label="Flipbook pages"></div>
     </div>
     <div id="loader" class="loader">Loading page…</div>
   </main>
@@ -176,19 +185,29 @@
   <div class="bottombar">
     <div class="controls">
       <button id="prev-btn" type="button">Prev</button>
-      <input id="page-slider" type="range" min="1" max="56" step="1" value="1" />
+      <input id="page-slider" type="range" min="1" max="1" step="1" value="1" />
       <button id="next-btn" type="button">Next</button>
     </div>
   </div>
 
   <script src="./vendor/jquery.min.js"></script>
+  <script src="./vendor/scissor.min.js"></script>
   <script src="./vendor/turn.min.js"></script>
   <script>
-    const TOTAL_PAGES = 56;
+    const params = new URLSearchParams(window.location.search);
+    const FLIPBOOK_TITLE = params.get("title") || "IMPACT Report Flipbook";
+    const TOTAL_PAGES = Math.max(1, Number.parseInt(params.get("pages") || "56", 10) || 56);
+    const PAGES_DIR = (params.get("dir") || "pages").replace(/^\.?\//, "").replace(/\/+$/, "");
+    const SPLIT_LANDSCAPE = params.get("splitLandscape") === "true";
     const BOOK_WIDTH = 1000;
     let BOOK_HEIGHT = 650;
     let currentPage = 1;
+    let renderedPages = [];
+    let hasLeadingPaddingPage = false;
 
+    document.title = FLIPBOOK_TITLE;
+
+    const flipbookTitle = document.getElementById("flipbook-title");
     const pageIndicator = document.getElementById("page-indicator");
     const pageSlider = document.getElementById("page-slider");
     const prevBtn = document.getElementById("prev-btn");
@@ -200,7 +219,29 @@
     const flipbook = document.getElementById("flipbook");
     const $flipbook = window.jQuery("#flipbook");
 
-    const pagePath = (page) => `./pages/page-${String(page - 1).padStart(3, "0")}.jpg`;
+    flipbookTitle.textContent = FLIPBOOK_TITLE;
+    flipbook.setAttribute("aria-label", `${FLIPBOOK_TITLE} pages`);
+    pageSlider.max = "1";
+
+    const pagePath = (page) => `./${PAGES_DIR}/page-${String(page - 1).padStart(3, "0")}.jpg`;
+
+    const renderedToDisplayPage = (renderedPage) => Math.max(1, renderedPage - (hasLeadingPaddingPage ? 1 : 0));
+    const displayToRenderedPage = (displayPage) => displayPage + (hasLeadingPaddingPage ? 1 : 0);
+
+    const loadImageMeta = (page) => new Promise((resolve, reject) => {
+      const image = new Image();
+      const imagePath = pagePath(page);
+
+      image.onload = () => {
+        resolve({ page, imagePath, width: image.naturalWidth, height: image.naturalHeight });
+      };
+
+      image.onerror = () => {
+        reject(new Error(`Unable to load ${imagePath}`));
+      };
+
+      image.src = imagePath;
+    });
 
     const loadScript = (src, onLoad, onError) => {
       const script = document.createElement("script");
@@ -244,14 +285,80 @@
       );
     };
 
-    const buildPages = () => {
+    const buildPages = (images) => {
       const fragment = document.createDocumentFragment();
-      for (let page = 1; page <= TOTAL_PAGES; page += 1) {
+
+      renderedPages = [];
+      hasLeadingPaddingPage = false;
+
+      if (SPLIT_LANDSCAPE && images.length > 0 && images[0].width > images[0].height) {
+        const paddingPage = document.createElement("div");
+        paddingPage.className = "page";
+        fragment.appendChild(paddingPage);
+        renderedPages.push({ imagePath: null, isPadding: true });
+        hasLeadingPaddingPage = true;
+      }
+
+      images.forEach((page) => {
+        const shouldSplit = SPLIT_LANDSCAPE && page.width > page.height;
+
+        if (shouldSplit) {
+          const stage = document.createElement("div");
+          stage.style.position = "absolute";
+          stage.style.left = "-100000px";
+          stage.style.top = "0";
+          stage.style.visibility = "hidden";
+          stage.style.width = `${BOOK_WIDTH}px`;
+          stage.style.height = `${BOOK_HEIGHT}px`;
+
+          const spreadImage = document.createElement("img");
+          spreadImage.src = page.imagePath;
+          spreadImage.alt = "";
+          spreadImage.draggable = false;
+          spreadImage.style.display = "block";
+          spreadImage.style.width = `${BOOK_WIDTH}px`;
+          spreadImage.style.height = `${BOOK_HEIGHT}px`;
+
+          stage.appendChild(spreadImage);
+          document.body.appendChild(stage);
+          window.jQuery(spreadImage).scissor();
+
+          const wrappers = Array.from(stage.children);
+          wrappers.forEach((wrapper) => {
+            wrapper.style.width = "100%";
+            wrapper.style.height = "100%";
+
+            const innerImage = wrapper.querySelector("img");
+            if (innerImage) {
+              innerImage.classList.add("page-image");
+              innerImage.style.width = `${BOOK_WIDTH}px`;
+              innerImage.style.height = `${BOOK_HEIGHT}px`;
+              innerImage.style.maxWidth = "none";
+            }
+
+            const pageNode = document.createElement("div");
+            pageNode.className = "page";
+            pageNode.appendChild(wrapper);
+            fragment.appendChild(pageNode);
+            renderedPages.push({ imagePath: page.imagePath });
+          });
+
+          document.body.removeChild(stage);
+          return;
+        }
+
         const pageNode = document.createElement("div");
         pageNode.className = "page";
-        pageNode.style.backgroundImage = `url('${pagePath(page)}')`;
+        const pageImage = document.createElement("img");
+        pageImage.className = "page-image";
+        pageImage.src = page.imagePath;
+        pageImage.alt = "";
+        pageImage.draggable = false;
+        pageNode.appendChild(pageImage);
         fragment.appendChild(pageNode);
-      }
+        renderedPages.push({ imagePath: page.imagePath });
+      });
+
       flipbook.appendChild(fragment);
     };
 
@@ -263,24 +370,36 @@
       return [view[0] || currentPage, view[1] || currentPage];
     };
 
+    const getCurrentDisplayView = () => {
+      const [renderedLeft, renderedRight] = getCurrentView();
+      return [renderedToDisplayPage(renderedLeft), renderedToDisplayPage(renderedRight)];
+    };
+
     const updateUi = () => {
-      const [left, right] = getCurrentView();
-      if (left === right || left === 1 || right === TOTAL_PAGES) {
-        const singlePage = left === 1 ? 1 : right === TOTAL_PAGES ? TOTAL_PAGES : currentPage;
-        pageIndicator.textContent = `Page ${singlePage} / ${TOTAL_PAGES}`;
+      const [renderedLeft, renderedRight] = getCurrentView();
+      const left = renderedToDisplayPage(renderedLeft);
+      const right = renderedToDisplayPage(renderedRight);
+      const totalRenderedPages = renderedPages.length;
+      const totalDisplayPages = totalRenderedPages - (hasLeadingPaddingPage ? 1 : 0);
+
+      if (left === right || left === 1 || right === totalDisplayPages) {
+        const singlePage = left === 1 ? 1 : right === totalDisplayPages ? totalDisplayPages : currentPage;
+        pageIndicator.textContent = `Page ${singlePage} / ${totalDisplayPages}`;
       } else {
-        pageIndicator.textContent = `Pages ${left}-${right} / ${TOTAL_PAGES}`;
+        pageIndicator.textContent = `Pages ${left}-${right} / ${totalDisplayPages}`;
       }
 
-      pageSlider.value = String(currentPage);
+      currentPage = left;
+      pageSlider.value = String(left);
       prevBtn.disabled = left <= 1;
-      nextBtn.disabled = right >= TOTAL_PAGES;
+      nextBtn.disabled = right >= totalDisplayPages;
     };
 
     const goToPage = (page) => {
-      const target = Math.max(1, Math.min(TOTAL_PAGES, page));
+      const totalDisplayPages = renderedPages.length - (hasLeadingPaddingPage ? 1 : 0);
+      const target = Math.max(1, Math.min(totalDisplayPages, page));
       if (target === currentPage) return;
-      $flipbook.turn("page", target);
+      $flipbook.turn("page", displayToRenderedPage(target));
     };
 
     const fitFlipbookToViewer = () => {
@@ -300,18 +419,26 @@
       $flipbook.turn("center");
     };
 
-    const init = () => {
+    const init = async () => {
       loader.classList.add("show");
 
-      const firstImage = new Image();
-      firstImage.onload = () => {
-        const ratio = firstImage.naturalWidth / firstImage.naturalHeight || 0.77;
+      try {
+        const images = await Promise.all(
+          Array.from({ length: TOTAL_PAGES }, (_, index) => loadImageMeta(index + 1))
+        );
+
+        const firstPage = images[0];
+        const firstLeafWidth = SPLIT_LANDSCAPE && firstPage.width > firstPage.height
+          ? firstPage.width / 2
+          : firstPage.width;
+        const ratio = firstLeafWidth / firstPage.height || 0.77;
         BOOK_HEIGHT = Math.round(BOOK_WIDTH / (ratio * 2));
 
         flipbook.style.width = `${BOOK_WIDTH}px`;
         flipbook.style.height = `${BOOK_HEIGHT}px`;
 
-        buildPages();
+        buildPages(images);
+        pageSlider.max = String(renderedPages.length - (hasLeadingPaddingPage ? 1 : 0));
 
         loadTurnEngine(() => {
           if (typeof $flipbook.turn !== "function") {
@@ -328,7 +455,7 @@
             gradients: true,
             acceleration: true,
             duration: 420,
-            page: 1,
+            page: hasLeadingPaddingPage ? 2 : 1,
             when: {
               turned: (_, page) => {
                 currentPage = page;
@@ -345,32 +472,38 @@
 
           window.addEventListener("resize", fitFlipbookToViewer);
         });
-      };
-
-      firstImage.onerror = () => {
+      } catch {
         loader.textContent = "Unable to load flipbook pages.";
-      };
-
-      firstImage.src = pagePath(1);
+      }
     };
 
-    prevBtn.addEventListener("click", () => $flipbook.turn("previous"));
-    nextBtn.addEventListener("click", () => $flipbook.turn("next"));
+    const goPrevious = () => {
+      const [left] = getCurrentDisplayView();
+      goToPage(left - 1);
+    };
+
+    const goNext = () => {
+      const [, right] = getCurrentDisplayView();
+      goToPage(right + 1);
+    };
+
+    prevBtn.addEventListener("click", goPrevious);
+    nextBtn.addEventListener("click", goNext);
 
     pageSlider.addEventListener("input", () => {
       const requestedPage = Number(pageSlider.value);
       goToPage(requestedPage);
     });
 
-    tapPrev.addEventListener("click", () => $flipbook.turn("previous"));
-    tapNext.addEventListener("click", () => $flipbook.turn("next"));
+    tapPrev.addEventListener("click", goPrevious);
+    tapNext.addEventListener("click", goNext);
 
     window.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
-        $flipbook.turn("previous");
+        goPrevious();
       }
       if (event.key === "ArrowRight") {
-        $flipbook.turn("next");
+        goNext();
       }
     });
 
