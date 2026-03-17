@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autodesk Viewer (Offline)</title>
+
+  <link rel="stylesheet" href="../src/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="../src/lib/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./lib/style.min.css">
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bs-body-bg, #fff);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #viewer {
+      flex: 1;
+      min-height: 420px;
+      background: var(--bs-body-bg, #fff);
+    }
+
+    .toolbar {
+      border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+      background: var(--bs-body-bg, #fff);
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status {
+      font-size: 0.95rem;
+    }
+  </style>
+
+  <link rel="stylesheet" href="../src/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="../src/lib/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+  <div id="viewer"></div>
+
+  <script id="autodesk-viewer-runtime" src="./lib/viewer3D.min.js"></script>
+  <script>
+    const DEFAULT_OFFLINE_MODEL_PATH = './models/offline-svf/1/Robot Assembly.svf';
+    let viewer;
+
+    function normalizeModelPath(inputPath) {
+      if (!inputPath) {
+        return '';
+      }
+
+      if (inputPath.startsWith('urn:') || inputPath.startsWith('http://') || inputPath.startsWith('https://')) {
+        return inputPath;
+      }
+
+      return inputPath;
+    }
+
+    function loadModel(path) {
+      if (!path) {
+        console.warn('No model path provided. Skipping model load.');
+        return;
+      }
+
+      const modelPath = normalizeModelPath(path);
+      console.log(`Loading ${modelPath}...`);
+
+      if (!viewer) {
+        console.warn('Viewer not initialized.');
+        return;
+      }
+
+      const lowerPath = modelPath.toLowerCase();
+      const isBubble = lowerPath.endsWith('bubble.json');
+
+      if (isBubble) {
+        Autodesk.Viewing.Document.load(
+          modelPath,
+          (doc) => {
+            const defaultNode = doc.getRoot().getDefaultGeometry();
+            if (!defaultNode) {
+              console.warn('No default geometry found in bubble.');
+              return;
+            }
+
+            viewer.loadDocumentNode(doc, defaultNode).then(
+              () => console.log('Model loaded.'),
+              (error) => console.error(`Failed to load document node: ${error}`)
+            );
+          },
+          (code, message) => console.error(`Document load failed (${code}): ${message || 'Unknown error'}`)
+        );
+
+        return;
+      }
+
+      viewer.loadModel(
+        modelPath,
+        {},
+        () => console.log('Model loaded.'),
+        (errorCode, errorMessage) => console.error(`Model load failed (${errorCode}): ${errorMessage || 'Unknown error'}`, true)
+      );
+    }
+
+    function initializeViewer() {
+      if (!window.Autodesk || !Autodesk.Viewing) {
+        console.warn('Viewer runtime not found. Add local Autodesk Viewer files in autodesk-viewer/lib.', true);
+        return;
+      }
+
+      const options = {
+        env: 'Local'
+      };
+
+      Autodesk.Viewing.Initializer(options, () => {
+        const container = document.getElementById('viewer');
+        viewer = new Autodesk.Viewing.GuiViewer3D(container, {
+          extensions: ['Autodesk.DocumentBrowser']
+        });
+
+        const startedCode = viewer.start();
+        if (startedCode > 0) {
+          console.error(`Viewer start failed (code ${startedCode}).`, true);
+          return;
+        }
+
+        loadModel(DEFAULT_OFFLINE_MODEL_PATH);
+      });
+    }
+
+    function startWhenRuntimeReady() {
+      const runtimeScript = document.getElementById('autodesk-viewer-runtime');
+
+      if (window.Autodesk && Autodesk.Viewing) {
+        initializeViewer();
+        return;
+      }
+
+      if (!runtimeScript) {
+        console.error('Viewer runtime script tag missing.', true);
+        return;
+      }
+
+      console.log('Loading viewer runtime...');
+      runtimeScript.addEventListener('load', initializeViewer, { once: true });
+      runtimeScript.addEventListener('error', () => {
+        console.error('Failed to load ./lib/viewer3D.min.js', true);
+      }, { once: true });
+    }
+
+    startWhenRuntimeReady();
+  </script>
+</body>
+
+</html>

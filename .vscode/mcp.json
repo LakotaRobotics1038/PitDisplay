@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "aps-mcp": {
+      "type": "http",
+      "url": "https://wasmer-mcp-claude.wasmer.app/mcp"
+    }
+  }
+}
