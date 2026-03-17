@@ -221,6 +221,35 @@
   <script src="./vendor/scissor.min.js"></script>
   <script src="./vendor/turn.min.js"></script>
   <script>
+    let lastActivityPingAt = 0;
+
+    const notifyParentActivity = (force = false) => {
+      const now = Date.now();
+      if (!force && now - lastActivityPingAt < 500) {
+        return;
+      }
+
+      lastActivityPingAt = now;
+      window.parent?.postMessage({
+        type: 'pitdisplay:activity',
+        source: 'flipbook'
+      }, '*');
+    };
+
+    const setupActivityBridge = () => {
+      const activityEvents = ['pointerdown', 'pointermove', 'wheel', 'touchstart', 'keydown', 'click'];
+      activityEvents.forEach((eventName) => {
+        window.addEventListener(eventName, () => notifyParentActivity(false), { passive: true });
+      });
+
+      window.addEventListener('focus', () => notifyParentActivity(true));
+      window.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          notifyParentActivity(true);
+        }
+      });
+    };
+
     const params = new URLSearchParams(window.location.search);
     const FLIPBOOK_TITLE = params.get("title") || "IMPACT Report Flipbook";
     const TOTAL_PAGES = Math.max(1, Number.parseInt(params.get("pages") || "56", 10) || 56);
@@ -491,6 +520,7 @@
               turned: (_, page) => {
                 currentPage = page;
                 updateUi();
+                notifyParentActivity(false);
               }
             }
           });
@@ -538,6 +568,7 @@
       }
     });
 
+    setupActivityBridge();
     init();
   </script>
 </body>

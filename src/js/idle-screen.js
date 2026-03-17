@@ -62,6 +62,17 @@ class IdleScreenManager {
         }
       }, true);
     });
+
+    window.addEventListener('message', (event) => {
+      const data = event?.data;
+      if (!data || data.type !== 'pitdisplay:activity') {
+        return;
+      }
+
+      if (!this.idleScreen.classList.contains('active')) {
+        this.resetIdleTimer();
+      }
+    });
   }
 
   resetIdleTimer() {

@@ -56,6 +56,34 @@
   <script>
     const DEFAULT_OFFLINE_MODEL_PATH = './models/offline-svf/1/Robot Assembly.svf';
     let viewer;
+    let lastActivityPingAt = 0;
+
+    function notifyParentActivity(force = false) {
+      const now = Date.now();
+      if (!force && now - lastActivityPingAt < 500) {
+        return;
+      }
+
+      lastActivityPingAt = now;
+      window.parent?.postMessage({
+        type: 'pitdisplay:activity',
+        source: 'cad-viewer'
+      }, '*');
+    }
+
+    function setupActivityBridge() {
+      const activityEvents = ['pointerdown', 'pointermove', 'wheel', 'touchstart', 'keydown'];
+      activityEvents.forEach((eventName) => {
+        window.addEventListener(eventName, () => notifyParentActivity(false), { passive: true });
+      });
+
+      window.addEventListener('focus', () => notifyParentActivity(true));
+      window.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          notifyParentActivity(true);
+        }
+      });
+    }
 
     function normalizeModelPath(inputPath) {
       if (!inputPath) {
@@ -137,6 +165,10 @@
           return;
         }
 
+        viewer.addEventListener(Autodesk.Viewing.CAMERA_CHANGE_EVENT, () => {
+          notifyParentActivity(false);
+        });
+
         loadModel(DEFAULT_OFFLINE_MODEL_PATH);
       });
     }
@@ -161,6 +193,7 @@
       }, { once: true });
     }
 
+    setupActivityBridge();
     startWhenRuntimeReady();
   </script>
 </body>
