@@ -3,9 +3,64 @@ const robotResetBtn = document.querySelector(".robot-reset-btn");
 const robotLabels = document.querySelectorAll(".robot-label");
 const subsystemImages = document.querySelectorAll(".robot-subsystem");
 const robotBase = document.querySelector(".robot-base");
+const cadIframe = document.getElementById("robot-cad-iframe");
 
 const FADE_MS = 400;
 let activeImage = null;
+
+let cadRetryTimer = null;
+let cadViewerConnected = false;
+let cadRetryDelayMs = 1500;
+
+const CAD_RETRY_INITIAL_DELAY_MS = 1500;
+const CAD_RETRY_MAX_DELAY_MS = 10000;
+
+const getCadViewerUrl = () => {
+	if (!cadIframe) return "";
+	return cadIframe.dataset.src || cadIframe.getAttribute("src") || "";
+};
+
+const withCacheBuster = (url) => {
+	if (!url) return "";
+	const separator = url.includes("?") ? "&" : "?";
+	return `${url}${separator}retry=${Date.now()}`;
+};
+
+const clearCadRetryTimer = () => {
+	if (!cadRetryTimer) return;
+	clearTimeout(cadRetryTimer);
+	cadRetryTimer = null;
+};
+
+const scheduleCadRetry = () => {
+	clearCadRetryTimer();
+	cadRetryTimer = setTimeout(() => {
+		attemptCadViewerLoad();
+	}, cadRetryDelayMs);
+};
+
+const attemptCadViewerLoad = () => {
+	if (!cadIframe || cadViewerConnected) return;
+
+	const cadViewerUrl = getCadViewerUrl();
+	if (!cadViewerUrl) return;
+
+	cadIframe.src = withCacheBuster(cadViewerUrl);
+	scheduleCadRetry();
+	cadRetryDelayMs = Math.min(Math.floor(cadRetryDelayMs * 1.5), CAD_RETRY_MAX_DELAY_MS);
+};
+
+const markCadViewerConnected = () => {
+	if (cadViewerConnected) return;
+	cadViewerConnected = true;
+	clearCadRetryTimer();
+	cadRetryDelayMs = CAD_RETRY_INITIAL_DELAY_MS;
+};
+
+const startCadViewerRetry = () => {
+	if (!cadIframe) return;
+	attemptCadViewerLoad();
+};
 
 const transitionToImage = (incoming) => {
 	return new Promise((resolve) => {
@@ -113,11 +168,22 @@ if (robotResetBtn) {
 
 window.resetRobotSection = resetRobotSection;
 
+window.addEventListener("message", (event) => {
+	const data = event?.data;
+	if (!data || data.source !== "cad-viewer") return;
+
+	if (data.type === "pitdisplay:viewer-ready" || data.type === "pitdisplay:activity") {
+		markCadViewerConnected();
+	}
+});
+
 // Initialize: show base robot image
 if (robotBase) {
 	robotBase.classList.add("active");
 	activeImage = robotBase;
 }
+
+startCadViewerRetry();
 
 // Toggle text sections on button click
 const toggleButtons = document.querySelectorAll(".toggle-section");

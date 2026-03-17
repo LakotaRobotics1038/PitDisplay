@@ -71,6 +71,13 @@
       }, '*');
     }
 
+    function notifyParentReady() {
+      window.parent?.postMessage({
+        type: 'pitdisplay:viewer-ready',
+        source: 'cad-viewer'
+      }, '*');
+    }
+
     function setupActivityBridge() {
       const activityEvents = ['pointerdown', 'pointermove', 'wheel', 'touchstart', 'keydown'];
       activityEvents.forEach((eventName) => {
@@ -164,6 +171,8 @@
           console.error(`Viewer start failed (code ${startedCode}).`, true);
           return;
         }
+
+        notifyParentReady();
 
         viewer.addEventListener(Autodesk.Viewing.CAMERA_CHANGE_EVENT, () => {
           notifyParentActivity(false);
