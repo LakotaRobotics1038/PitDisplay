@@ -163,4 +163,14 @@
       display: block;
     }
   }
+
+  #robot-cad-model-panel {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #robot-cad-model-panel .robot-viewer-embed {
+    height: 100%;
+    aspect-ratio: auto;
+  }
 }

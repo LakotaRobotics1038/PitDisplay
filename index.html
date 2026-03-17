@@ -81,141 +81,150 @@
     </div>
 
     <div class="section" id="robot-section">
+      <div class="section-header sub-nav-header">
+        <div class="sub-nav" data-sub-nav data-sub-nav-section="robot" data-sub-nav-default="overview" role="tablist"
+          aria-label="Robot subsections">
+          <button class="sub-nav-btn active" type="button" role="tab" aria-selected="true"
+            data-sub-nav-target="robot-overview-panel">Overview</button>
+          <button class="sub-nav-btn" type="button" role="tab" aria-selected="false"
+            data-sub-nav-target="robot-cad-model-panel">CAD Model</button>
+        </div>
+      </div>
       <div class="section-body">
-        <div class="row mb-auto">
-          <div class="col">
-            <img style="max-height: 240px;" src="./src/img/our-robot/WesCavator.png" alt="WesCavator" />
-          </div>
-          <div class="col">
-            <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
-              <button class="toggle-section btn btn-primary btn-lg rounded-pill w-100" data-target="robot-specs">
-                Data & Specs
-              </button>
-              <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
-                data-video="./src/videos/WesCavator Robot Name Reveal 26.mp4">2026 Robot Name Reveal</button>
-              <button class="open-flipbook btn btn-primary btn-lg rounded-pill w-100"
-                data-flipbook-src="./src/flipbook/index.html?title=2026%20Pit%20Binder&pages=70&dir=2026-pit-binder-pages&splitLandscape=true"
-                data-flipbook-title="2026 Pit Binder Flipbook">
-                2026 Pit Binder
-              </button>
+        <div id="robot-overview-panel" class="sub-nav-panel active" role="tabpanel">
+          <div class="row mb-auto">
+            <div class="col">
+              <img style="max-height: 240px;" src="./src/img/our-robot/WesCavator.png" alt="WesCavator" />
+            </div>
+            <div class="col">
+              <div class="button-list d-flex flex-column align-items-center gap-3 p-4 w-100">
+                <button class="toggle-section btn btn-primary btn-lg rounded-pill w-100" data-target="robot-specs">
+                  Data & Specs
+                </button>
+                <button class="open-panel btn btn-primary btn-lg rounded-pill w-100"
+                  data-video="./src/videos/WesCavator Robot Name Reveal 26.mp4">2026 Robot Name Reveal</button>
+                <button class="open-flipbook btn btn-primary btn-lg rounded-pill w-100"
+                  data-flipbook-src="./src/flipbook/index.html?title=2026%20Pit%20Binder&pages=70&dir=2026-pit-binder-pages&splitLandscape=true"
+                  data-flipbook-title="2026 Pit Binder Flipbook">
+                  2026 Pit Binder
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="robot-specs" class="text-container mb-auto d-none">
-          <ul>
-            <li>Driver/Operator Experience</li>
-            <li>24x24 inch base</li>
-            <li>Swerve Drive Base</li>
-            <li>Hang at L1</li>
-            <li>Preload 8</li>
-            <li>Continuous to intake</li>
-            <li>~15 Balls Per Second</li>
-            <li>Passing Ability</li>
-            <li>Defense Capability</li>
-          </ul>
-        </div>
-        <div id="robot-shooters" class="text-container mb-auto d-none">
-          <ul>
-            <li>Dual Shooters</li>
-            <li>2 Motors + Flywheel Per Shooter</li>
-            <li>Twin Loader system</li>
-            <li>~15 Balls Per Second</li>
-            <li>Hood Adjustment System</li>
-            <li>Large Shooting range</li>
-          </ul>
-        </div>
-        <div id="robot-climb" class="text-container mb-auto d-none">
-          <span>
+          <div id="robot-specs" class="text-container mb-auto d-none">
             <ul>
-              <li>Shooter Mounted</li>
-              <li>Stage 1 Climber</li>
-              <li>WWPGD Side-Decal</li>
-              <li>Winch Retraction System</li>
+              <li>Driver/Operator Experience</li>
+              <li>24x24 inch base</li>
+              <li>Swerve Drive Base</li>
+              <li>Hang at L1</li>
+              <li>Preload 8</li>
+              <li>Continuous to intake</li>
+              <li>~15 Balls Per Second</li>
+              <li>Passing Ability</li>
+              <li>Defense Capability</li>
             </ul>
-          </span>
-        </div>
-        <div id="robot-drive" class="text-container mb-auto d-none">
-          <span>
+          </div>
+          <div id="robot-shooters" class="text-container mb-auto d-none">
             <ul>
-              <li>Holding Controls elements</li>
-              <li>Swerve Drive</li>
-              <li>Polycarbonate Belly pan protector</li>
-              <li>Grease guards around motors protecting controls elements</li>
-              <li>Seat Belt buckle lifting system</li>
+              <li>Dual Shooters</li>
+              <li>2 Motors + Flywheel Per Shooter</li>
+              <li>Twin Loader system</li>
+              <li>~15 Balls Per Second</li>
+              <li>Hood Adjustment System</li>
+              <li>Large Shooting range</li>
             </ul>
-          </span>
+          </div>
+          <div id="robot-climb" class="text-container mb-auto d-none">
+            <span>
+              <ul>
+                <li>Shooter Mounted</li>
+                <li>Stage 1 Climber</li>
+                <li>WWPGD Side-Decal</li>
+                <li>Winch Retraction System</li>
+              </ul>
+            </span>
+          </div>
+          <div id="robot-drive" class="text-container mb-auto d-none">
+            <span>
+              <ul>
+                <li>Holding Controls elements</li>
+                <li>Swerve Drive</li>
+                <li>Polycarbonate Belly pan protector</li>
+                <li>Grease guards around motors protecting controls elements</li>
+                <li>Seat Belt buckle lifting system</li>
+              </ul>
+            </span>
+          </div>
+          <div id="robot-hopper" class="text-container mb-auto d-none">
+            <span>
+              <ul>
+                <li>Extendable extra capacity</li>
+                <li>50+ Ball Capacity</li>
+                <li>Auto Retracting extension area</li>
+              </ul>
+            </span>
+          </div>
+          <div id="robot-acquisition" class="text-container mb-auto d-none">
+            <span>
+              <ul>
+                <li>Auto Extension & Retraction</li>
+                <li>Transition System to Storage</li>
+                <li>Sturdy Frame with 4 wedges to lock it horizontally</li>
+                <li>Hopper extension system built in</li>
+              </ul>
+            </span>
+          </div>
+          <div class="robot-container mb-auto">
+            <img src="./src/img/our-robot/Robot Assembly.png" alt="2026 Robot" class="robot-image robot-base">
+            <img src="./src/img/our-robot/Robot Base.png" alt="Drivetrain" class="robot-image robot-subsystem"
+              data-subsystem="drivetrain">
+            <img src="./src/img/our-robot/Robot Climb.png" alt="Climb" class="robot-image robot-subsystem"
+              data-subsystem="climb">
+            <img src="./src/img/our-robot/Robot Shooter.png" alt="Shooters" class="robot-image robot-subsystem"
+              data-subsystem="shooters">
+            <img src="./src/img/our-robot/Robot Acquisition.png" alt="Acquisition" class="robot-image robot-subsystem"
+              data-subsystem="acquisition">
+            <img src="./src/img/our-robot/Robot Hopper.png" alt="Hopper" class="robot-image robot-subsystem"
+              data-subsystem="hopper">
+            <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">
+              <i class="bi bi-arrow-counterclockwise"></i>
+              Reset
+            </button>
+
+            <!-- Labeled components around the robot -->
+            <button class="robot-label robot-label-hopper" data-component="hopper">
+              <span class="label-name">Hopper</span>
+              <span class="label-subtitle">learn more</span>
+            </button>
+
+            <button class="robot-label robot-label-climb" data-component="climb">
+              <span class="label-name">Climb</span>
+              <span class="label-subtitle">learn more</span>
+            </button>
+
+            <button class="robot-label robot-label-shooters" data-component="shooters">
+              <span class="label-name">Shooters</span>
+              <span class="label-subtitle">learn more</span>
+            </button>
+
+            <button class="robot-label robot-label-drivetrain" data-component="drivetrain">
+              <span class="label-name">Drive Train</span>
+              <span class="label-subtitle">learn more</span>
+            </button>
+
+            <button class="robot-label robot-label-acquisition" data-component="acquisition">
+              <span class="label-name">Acquisition</span>
+              <span class="label-subtitle">learn more</span>
+            </button>
+          </div>
         </div>
-        <div id="robot-hopper" class="text-container mb-auto d-none">
-          <span>
-            <ul>
-              <li>Extendable extra capacity</li>
-              <li>50+ Ball Capacity</li>
-              <li>Auto Retracting extension area</li>
-            </ul>
-          </span>
-        </div>
-        <div id="robot-acquisition" class="text-container mb-auto d-none">
-          <span>
-            <ul>
-              <li>Auto Extension & Retraction</li>
-              <li>Transition System to Storage</li>
-              <li>Sturdy Frame with 4 wedges to lock it horizontally</li>
-              <li>Hopper extension system built in</li>
-            </ul>
-          </span>
-        </div>
-        <div class="robot-container mb-auto">
-          <img src="./src/img/our-robot/Robot Assembly.png" alt="2026 Robot" class="robot-image robot-base">
-          <img src="./src/img/our-robot/Robot Base.png" alt="Drivetrain" class="robot-image robot-subsystem"
-            data-subsystem="drivetrain">
-          <img src="./src/img/our-robot/Robot Climb.png" alt="Climb" class="robot-image robot-subsystem"
-            data-subsystem="climb">
-          <img src="./src/img/our-robot/Robot Shooter.png" alt="Shooters" class="robot-image robot-subsystem"
-            data-subsystem="shooters">
-          <img src="./src/img/our-robot/Robot Acquisition.png" alt="Acquisition" class="robot-image robot-subsystem"
-            data-subsystem="acquisition">
-          <img src="./src/img/our-robot/Robot Hopper.png" alt="Hopper" class="robot-image robot-subsystem"
-            data-subsystem="hopper">
-          <button class="robot-reset-btn" style="display: none;" aria-label="Reset to full robot view">
-            <i class="bi bi-arrow-counterclockwise"></i>
-            Reset
-          </button>
 
-          <!-- Labeled components around the robot -->
-          <button class="robot-label robot-label-hopper" data-component="hopper">
-            <span class="label-name">Hopper</span>
-            <span class="label-subtitle">learn more</span>
-          </button>
-
-          <button class="robot-label robot-label-climb" data-component="climb">
-            <span class="label-name">Climb</span>
-            <span class="label-subtitle">learn more</span>
-          </button>
-
-          <button class="robot-label robot-label-shooters" data-component="shooters">
-            <span class="label-name">Shooters</span>
-            <span class="label-subtitle">learn more</span>
-          </button>
-
-          <button class="robot-label robot-label-drivetrain" data-component="drivetrain">
-            <span class="label-name">Drive Train</span>
-            <span class="label-subtitle">learn more</span>
-          </button>
-
-          <button class="robot-label robot-label-acquisition" data-component="acquisition">
-            <span class="label-name">Acquisition</span>
-            <span class="label-subtitle">learn more</span>
-          </button>
-        </div>
-
-        <div class="robot-viewer-embed mt-3">
-          <iframe
-            src="http://localhost:8080/"
-            title="2026 Robot 3D Viewer"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            allowfullscreen>
-          </iframe>
+        <div id="robot-cad-model-panel" class="sub-nav-panel" role="tabpanel" hidden>
+          <div class="robot-viewer-embed mt-3">
+            <iframe src="http://localhost:8080/" title="2026 Robot 3D Viewer" loading="lazy"
+              referrerpolicy="no-referrer" allowfullscreen>
+            </iframe>
+          </div>
         </div>
       </div>
     </div>
