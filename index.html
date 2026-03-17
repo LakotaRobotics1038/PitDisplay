@@ -271,34 +271,71 @@
     </div>
 
     <div class="section" id="scouting-section">
+      <div class="section-header scouting-sub-header">
+        <div class="scouting-sub-nav" role="tablist" aria-label="Scouting subsections">
+          <button class="scouting-sub-btn active" type="button" role="tab" aria-selected="true"
+            data-scouting-target="match-scouting-panel">Match Scouting</button>
+          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
+            data-scouting-target="pit-scouting-panel">Pit Scouting</button>
+          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
+            data-scouting-target="reporting-panel">Reporting</button>
+          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
+            data-scouting-target="concept-capturing-panel">Concept Capturing</button>
+        </div>
+      </div>
       <div class="section-body">
-        <p>
-          Using our custom-built system for scouting apps, we collect metrics for scoring using teleop and auton page
-          which also is how we track percentage of times the robot broke, a-stopped, or e-stopped. When a robot is
-          broken, we have a page in our pit scouting app to go ask questions to the team about the issue. We also
-          collect position of hang using a designated endgame page. And at the end the match we use our final page to
-          collect any penalties, defense, passing, and general assessment about the team scouted. With the match
-          scouting and pit scouting, we then create a power bi report to collect the data and turn it into the
-          information we need to pick our alliance partners
-        </p>
-        <div class="row row-cols-3 g-3">
-          <div class="col">
-            <img class="img-fluid w-100" src="./src/img/scouting/1.jpg" alt="Scouting image 1" />
-          </div>
-          <div class="col">
-            <img class="img-fluid w-100" src="./src/img/scouting/2.jpg" alt="Scouting image 2" />
-          </div>
-          <div class="col">
-            <img class="img-fluid w-100" src="./src/img/scouting/3.jpg" alt="Scouting image 3" />
+        <div id="match-scouting-panel" class="scouting-sub-panel active" role="tabpanel">
+          <p>
+            Using our custom-built apps for scouting, we collect metrics for scoring using teleop and auton page. We
+            track percentage of times the robot broke, a-stopped, or e-stopped and position of hang using a designated
+            endgame page. And at the end the match we use our final page to collect any penalties, defense, passing,
+            and general assessment about the team scouted.
+          </p>
+          <div id="match-scouting-image-row" class="row row-cols-3 g-3">
+            <div class="col">
+              <img class="img-fluid" src="./src/img/scouting/1.png" alt="Scouting image 1" />
+            </div>
+            <div class="col">
+              <img class="img-fluid" src="./src/img/scouting/2.png" alt="Scouting image 2" />
+            </div>
+            <div class="col">
+              <img class="img-fluid" src="./src/img/scouting/3.png" alt="Scouting image 3" />
+            </div>
           </div>
         </div>
-        <div class="row row-cols-2 g-3">
-          <div class="col">
-            <img class="img-fluid w-100" src="./src/img/scouting/4.jpg" alt="Scouting image 1" />
+
+        <div id="pit-scouting-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+          <p>
+            When a robot is broken, we have a page in our pit scouting app to go ask questions to the team about the
+            issue. We also have a general pit scouting page to collect information about the robot, the team, and any
+            notes that might be helpful for alliance selection. We use this information to help us determine which teams
+            we want to pick as alliance partners and to help us know how to work with them if we do pick them.
+          </p>
+          <div id="pit-scouting-image-row" class="row row-cols-2 g-3">
+            <div class="col">
+              <img class="img-fluid w-100" src="./src/img/scouting/4.png" alt="Pit scouting image 1" />
+            </div>
+            <div class="col">
+              <img class="img-fluid w-100" src="./src/img/scouting/5.png" alt="Pit scouting image 2" />
+            </div>
           </div>
-          <div class="col">
-            <img class="img-fluid w-100" src="./src/img/scouting/5.jpg" alt="Scouting image 2" />
-          </div>
+        </div>
+
+        <div id="reporting-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+          <p>
+            With the match scouting and pit scouting, we then create a power bi report to collect the data and turn it
+            into the information we need to pick our alliance partners.
+          </p>
+          <img class="img-fluid" src="./src/img/scouting/6.png" alt="Power BI Report" />
+          <img class="img-fluid" src="./src/img/scouting/7.png" alt="Power BI Report" />
+        </div>
+
+        <div id="concept-capturing-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+          <p>
+            We capture strategic robot concepts from teams at events so we can compare ideas, discuss tradeoffs, and
+            bring the best concepts back to our team for future design decisions.
+          </p>
+          <img class="img-fluid w-50" src="./src/img/scouting/8.jpg" alt="Concept capturing" />
         </div>
       </div>
     </div>

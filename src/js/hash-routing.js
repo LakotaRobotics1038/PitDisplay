@@ -3,8 +3,14 @@ const sections = document.querySelectorAll(".section");
 
 const sectionOrder = ["home", "robot", "about", "scouting", "fll", "pgsc", "impact", "sponsors"];
 
+const getSectionFromHash = () => {
+  const rawHash = window.location.hash.slice(1);
+  if (!rawHash) return "";
+  return rawHash.split(":")[0];
+};
+
 // Make switchSection globally available
-window.switchSection = (sectionName) => {
+window.switchSection = (sectionName, preserveHash = false) => {
   const currentSection = document.querySelector(".section.active");
   const targetSection = document.getElementById(`${sectionName}-section`);
   const targetBtn = document.querySelector(`[data-section="${sectionName}"]`);
@@ -16,7 +22,16 @@ window.switchSection = (sectionName) => {
     window.resetRobotSection?.();
   }
 
-  window.location.hash = sectionName;
+  const currentHash = window.location.hash.slice(1);
+  const hashBase = currentHash.split(":")[0];
+  const nextHash = preserveHash && hashBase === sectionName && currentHash.includes(":")
+    ? currentHash
+    : sectionName;
+
+  if (currentHash !== nextHash) {
+    window.location.hash = nextHash;
+  }
+
   document.body.setAttribute("data-section", sectionName);
 
   const currentIndex = currentSection
@@ -61,18 +76,18 @@ window.switchSection = (sectionName) => {
 };
 
 const handleHashChange = () => {
-  const hash = window.location.hash.slice(1);
+  const hash = getSectionFromHash();
   if (hash && sectionOrder.includes(hash)) {
-    window.switchSection(hash);
+    window.switchSection(hash, true);
   }
 };
 
 window.addEventListener("hashchange", handleHashChange);
 
 window.addEventListener("load", () => {
-  const hash = window.location.hash.slice(1);
+  const hash = getSectionFromHash();
   if (hash && sectionOrder.includes(hash)) {
-    window.switchSection(hash);
+    window.switchSection(hash, true);
   }
 });
 
