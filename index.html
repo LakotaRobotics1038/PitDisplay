@@ -271,20 +271,21 @@
     </div>
 
     <div class="section" id="scouting-section">
-      <div class="section-header scouting-sub-header">
-        <div class="scouting-sub-nav" role="tablist" aria-label="Scouting subsections">
-          <button class="scouting-sub-btn active" type="button" role="tab" aria-selected="true"
-            data-scouting-target="match-scouting-panel">Match Scouting</button>
-          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
-            data-scouting-target="pit-scouting-panel">Pit Scouting</button>
-          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
-            data-scouting-target="reporting-panel">Reporting</button>
-          <button class="scouting-sub-btn" type="button" role="tab" aria-selected="false"
-            data-scouting-target="concept-capturing-panel">Concept Capturing</button>
+      <div class="section-header sub-nav-header">
+        <div class="sub-nav" data-sub-nav data-sub-nav-section="scouting" data-sub-nav-default="match-scouting"
+          role="tablist" aria-label="Scouting subsections">
+          <button class="sub-nav-btn active" type="button" role="tab" aria-selected="true"
+            data-sub-nav-target="match-scouting-panel">Match Scouting</button>
+          <button class="sub-nav-btn" type="button" role="tab" aria-selected="false"
+            data-sub-nav-target="pit-scouting-panel">Pit Scouting</button>
+          <button class="sub-nav-btn" type="button" role="tab" aria-selected="false"
+            data-sub-nav-target="reporting-panel">Reporting</button>
+          <button class="sub-nav-btn" type="button" role="tab" aria-selected="false"
+            data-sub-nav-target="concept-capturing-panel">Concept Capturing</button>
         </div>
       </div>
       <div class="section-body">
-        <div id="match-scouting-panel" class="scouting-sub-panel active" role="tabpanel">
+        <div id="match-scouting-panel" class="sub-nav-panel active" role="tabpanel">
           <p>
             Using our custom-built apps for scouting, we collect metrics for scoring using teleop and auton page. We
             track percentage of times the robot broke, a-stopped, or e-stopped and position of hang using a designated
@@ -304,7 +305,7 @@
           </div>
         </div>
 
-        <div id="pit-scouting-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+        <div id="pit-scouting-panel" class="sub-nav-panel" role="tabpanel" hidden>
           <p>
             When a robot is broken, we have a page in our pit scouting app to go ask questions to the team about the
             issue. We also have a general pit scouting page to collect information about the robot, the team, and any
@@ -321,7 +322,7 @@
           </div>
         </div>
 
-        <div id="reporting-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+        <div id="reporting-panel" class="sub-nav-panel" role="tabpanel" hidden>
           <p>
             With the match scouting and pit scouting, we then create a power bi report to collect the data and turn it
             into the information we need to pick our alliance partners.
@@ -330,7 +331,7 @@
           <img class="img-fluid" src="./src/img/scouting/7.png" alt="Power BI Report" />
         </div>
 
-        <div id="concept-capturing-panel" class="scouting-sub-panel" role="tabpanel" hidden>
+        <div id="concept-capturing-panel" class="sub-nav-panel" role="tabpanel" hidden>
           <p>
             We capture strategic robot concepts from teams at events so we can compare ideas, discuss tradeoffs, and
             bring the best concepts back to our team for future design decisions.
@@ -661,6 +662,7 @@
   <script src="./src/js/seniors-modal.js"></script>
   <script src="./src/js/our-robot.js"></script>
   <script src="./src/js/main.js"></script>
+  <script src="./src/js/sub-nav.js"></script>
   <script src="./src/js/scouting.js"></script>
   <script src="./src/js/idle-screen.js"></script>
 </body>
