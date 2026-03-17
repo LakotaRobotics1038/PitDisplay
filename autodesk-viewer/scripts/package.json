@@ -1,0 +1,14 @@
+{
+  "name": "pitdisplay-autodesk-viewer-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Autodesk Viewer helper scripts",
+  "scripts": {
+    "translate:svf1": "node ./translate_urn_to_svf1.js",
+    "download:svf": "node ./download_svf_from_urn.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "forge-apis": "^0.9.10"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "type": "manifest",
+  "hasThumbnail": "true",
+  "status": "success",
+  "progress": "complete",
+  "region": "US",
+  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA",
+  "version": "1.0",
+  "derivatives": [
+    {
+      "name": "Robot Assembly.step",
+      "hasThumbnail": "true",
+      "status": "success",
+      "progress": "complete",
+      "properties": {
+        "Component Tool Information": {
+          "component_build_version": "Autodesk, Inc. Autodesk Translation Framework 15.5.0.0"
+        }
+      },
+      "outputType": "svf",
+      "children": [
+        {
+          "guid": "8c249ff2-6369-4ad1-a44d-8e304995c228",
+          "type": "geometry",
+          "role": "3d",
+          "name": "Scene",
+          "status": "success",
+          "progress": "complete",
+          "hasThumbnail": "true",
+          "children": [
+            {
+              "guid": "9cc4d91c-788c-40dc-aa77-ef6e2e02fc12",
+              "type": "resource",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf",
+              "role": "graphics",
+              "mime": "application/autodesk-svf"
+            },
+            {
+              "guid": "759b4ace-bf42-4fe7-9b18-f0c666536905",
+              "type": "resource",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_400x400.png",
+              "resolution": [
+                400,
+                400
+              ],
+              "mime": "image/png",
+              "role": "thumbnail"
+            },
+            {
+              "guid": "c1a352a3-d64c-4bd9-a096-a3df35bb880e",
+              "type": "resource",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_200x200.png",
+              "resolution": [
+                200,
+                200
+              ],
+              "mime": "image/png",
+              "role": "thumbnail"
+            },
+            {
+              "guid": "9cc84e48-5ce2-4fe5-bec3-e6aeaa5c4b34",
+              "type": "resource",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_100x100.png",
+              "resolution": [
+                100,
+                100
+              ],
+              "mime": "image/png",
+              "role": "thumbnail"
+            }
+          ]
+        },
+        {
+          "guid": "4bdf5b41-7f73-49ee-bfde-8552b6cfdd85",
+          "type": "resource",
+          "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/properties.db",
+          "role": "Autodesk.CloudPlatform.PropertyDatabase",
+          "mime": "application/autodesk-db",
+          "status": "success"
+        }
+      ]
+    }
+  ]
+}
