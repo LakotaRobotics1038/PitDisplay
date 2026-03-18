@@ -4,23 +4,23 @@
   "status": "success",
   "progress": "complete",
   "region": "US",
-  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA",
+  "urn": "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA",
   "version": "1.0",
   "derivatives": [
     {
-      "name": "Robot Assembly.step",
+      "name": "Robot Assembly2026-2.step",
       "hasThumbnail": "true",
       "status": "success",
       "progress": "complete",
       "properties": {
         "Component Tool Information": {
-          "component_build_version": "Autodesk, Inc. Autodesk Translation Framework 15.5.0.0"
+          "component_build_version": "Autodesk, Inc. Autodesk Translation Framework 15.8.1.0"
         }
       },
       "outputType": "svf",
       "children": [
         {
-          "guid": "8c249ff2-6369-4ad1-a44d-8e304995c228",
+          "guid": "f9a69a6b-307f-4b7c-ab30-cacfaf7e74ca",
           "type": "geometry",
           "role": "3d",
           "name": "Scene",
@@ -29,16 +29,16 @@
           "hasThumbnail": "true",
           "children": [
             {
-              "guid": "9cc4d91c-788c-40dc-aa77-ef6e2e02fc12",
+              "guid": "98b768a2-78bc-4b7e-9e0b-9dea1c8d02ee",
               "type": "resource",
-              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA/output/1/Robot Assembly2026-2.svf",
               "role": "graphics",
               "mime": "application/autodesk-svf"
             },
             {
-              "guid": "759b4ace-bf42-4fe7-9b18-f0c666536905",
+              "guid": "d49324b4-29ca-44eb-bdb4-f7e2700167f7",
               "type": "resource",
-              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_400x400.png",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA/output/1/Robot Assembly2026-2.svf.png01_thumb_400x400.png",
               "resolution": [
                 400,
                 400
@@ -47,9 +47,9 @@
               "role": "thumbnail"
             },
             {
-              "guid": "c1a352a3-d64c-4bd9-a096-a3df35bb880e",
+              "guid": "3d094d03-dc20-4a80-9904-57fef6cc29ad",
               "type": "resource",
-              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_200x200.png",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA/output/1/Robot Assembly2026-2.svf.png01_thumb_200x200.png",
               "resolution": [
                 200,
                 200
@@ -58,9 +58,9 @@
               "role": "thumbnail"
             },
             {
-              "guid": "9cc84e48-5ce2-4fe5-bec3-e6aeaa5c4b34",
+              "guid": "9e27e199-fdcc-4696-86a3-2232b3a97e16",
               "type": "resource",
-              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/Robot Assembly.svf.png01_thumb_100x100.png",
+              "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA/output/1/Robot Assembly2026-2.svf.png01_thumb_100x100.png",
               "resolution": [
                 100,
                 100
@@ -71,9 +71,9 @@
           ]
         },
         {
-          "guid": "4bdf5b41-7f73-49ee-bfde-8552b6cfdd85",
+          "guid": "92595e9b-f807-4d9a-a452-96f7e3675740",
           "type": "resource",
-          "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5LnN0ZXA/output/1/properties.db",
+          "urn": "urn:adsk.viewing:fs.file:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6cGl0ZGlzcGxheS9Sb2JvdCUyMEFzc2VtYmx5MjAyNi0yLnN0ZXA/output/1/properties.db",
           "role": "Autodesk.CloudPlatform.PropertyDatabase",
           "mime": "application/autodesk-db",
           "status": "success"
