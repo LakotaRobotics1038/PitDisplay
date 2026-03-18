@@ -1,5 +1,20 @@
 /* Robot Section Styles */
 #robot-section {
+  height: 100%;
+
+  #robot-section .section-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  #robot-overview-panel.sub-nav-panel {
+    flex: 1 1 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .robot-container {
     position: relative;
     width: 100%;
@@ -28,14 +43,30 @@
     }
   }
 
-  .robot-base    { z-index: 16; }
+  .robot-base {
+    z-index: 16;
+  }
 
   .robot-subsystem {
-    &[data-subsystem="drivetrain"] { z-index: 11; }
-    &[data-subsystem="climb"]      { z-index: 12; }
-    &[data-subsystem="shooters"]   { z-index: 13; }
-    &[data-subsystem="acquisition"]{ z-index: 14; }
-    &[data-subsystem="hopper"]     { z-index: 15; }
+    &[data-subsystem="drivetrain"] {
+      z-index: 11;
+    }
+
+    &[data-subsystem="climb"] {
+      z-index: 12;
+    }
+
+    &[data-subsystem="shooters"] {
+      z-index: 13;
+    }
+
+    &[data-subsystem="acquisition"] {
+      z-index: 14;
+    }
+
+    &[data-subsystem="hopper"] {
+      z-index: 15;
+    }
   }
 
   .robot-reset-btn {
