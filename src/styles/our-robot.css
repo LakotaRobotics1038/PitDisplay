@@ -52,10 +52,6 @@
       z-index: 11;
     }
 
-    &[data-subsystem="climb"] {
-      z-index: 12;
-    }
-
     &[data-subsystem="shooters"] {
       z-index: 13;
     }
@@ -127,12 +123,6 @@
     left: 2%;
     top: 30%;
     transform: translateY(-50%);
-  }
-
-  .robot-label-climb {
-    left: 64%;
-    top: 2%;
-    transform: translateX(-50%);
   }
 
   .robot-label-shooters {

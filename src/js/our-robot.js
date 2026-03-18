@@ -123,7 +123,6 @@ const resetRobotSection = async () => {
 
 const componentToTextSection = {
 	hopper: "robot-hopper",
-	climb: "robot-climb",
 	shooters: "robot-shooters",
 	drivetrain: "robot-drive",
 	acquisition: "robot-acquisition"
