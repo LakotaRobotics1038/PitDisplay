@@ -10,7 +10,7 @@ Converts every PDF in INPUT_DIR into 300 ppi JPEG pages for the flipbook viewer.
 Each PDF is written into its own subdirectory under OUTPUT_DIR.
 
 Example:
-  ./generate-flipbook-pages.sh . ./src/flipbook
+  ./generate-flipbook-pages.sh . .
 
 Output layout:
   OUTPUT_DIR/
