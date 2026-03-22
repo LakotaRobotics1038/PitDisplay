@@ -1,0 +1,13 @@
+[Unit]
+Description=Team 1038 Pit Display (Chromium Kiosk)
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'until [ -f /mnt/1038Pit/PitDisplay/index.html ]; do slee>
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

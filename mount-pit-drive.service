@@ -1,0 +1,20 @@
+[Unit]
+Description=Retry-mount 1038Pit USB at /mnt/1038Pit
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '\
+  for i in $(seq 1 60); do \
+    if [ -e /dev/disk/by-uuid/6987-B281 ]; then \
+      /usr/bin/mount /mnt/1038Pit 2>/tmp/mount-1038pit.err || true; \
+      /usr/bin/mountpoint -q /mnt/1038Pit && exit 0; \
+    fi; \
+    sleep 1; \
+  done; \
+  echo "FAILED TO MOUNT:"; cat /tmp/mount-1038pit.err || true; exit 1'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
