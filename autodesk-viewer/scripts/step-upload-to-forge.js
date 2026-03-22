@@ -4,7 +4,7 @@
 
 const fs = require('fs/promises');
 const path = require('path');
-const { AuthClientTwoLegged, ObjectsApi } = require('forge-apis');
+const { AuthClientTwoLegged, ObjectsApi, BucketsApi } = require('forge-apis');
 
 
 // Set your Forge credentials here or use environment variables (APS_CLIENT_ID/APS_CLIENT_SECRET preferred)
@@ -20,12 +20,37 @@ const BUCKET_KEY = `pitdisplay`;
 const STEP_FILE_PATH = process.argv[2];
 const FILE_NAME = path.basename(STEP_FILE_PATH);
 
+
+async function ensureBucketExists(bucketKey, authClient) {
+  const bucketsApi = new BucketsApi();
+  try {
+    // Try to get bucket details (will throw if not found)
+    await bucketsApi.getBucketDetails(bucketKey, authClient, authClient.getCredentials());
+    // Bucket exists
+  } catch (err) {
+    if (err.statusCode === 404) {
+      // Bucket does not exist, create it
+      const createOptions = {
+        bucketKey: bucketKey,
+        policyKey: 'transient' // or 'temporary' or 'persistent' as needed
+      };
+      await bucketsApi.createBucket(createOptions, {}, authClient, authClient.getCredentials());
+      console.log(`Bucket '${bucketKey}' created.`);
+    } else {
+      throw err;
+    }
+  }
+}
+
 async function main() {
   // Authenticate
   const authClient = new AuthClientTwoLegged(CLIENT_ID, CLIENT_SECRET, [
     'data:write', 'data:read', 'bucket:read', 'bucket:create'
   ], true);
   await authClient.authenticate();
+
+  // Ensure bucket exists
+  await ensureBucketExists(BUCKET_KEY, authClient);
 
   // Read file
   const data = await fs.readFile(STEP_FILE_PATH);
