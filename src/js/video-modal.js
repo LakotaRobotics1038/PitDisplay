@@ -34,8 +34,30 @@ if (modalEl && videoEl && buttons.length > 0 && window.bootstrap) {
     });
   });
 
+  // --- Idle timer keepalive logic ---
+  let idleKeepaliveInterval = null;
+  function startIdleKeepalive() {
+    if (idleKeepaliveInterval) return;
+    if (window.idleScreenManager && typeof window.idleScreenManager.resetIdleTimer === 'function') {
+      idleKeepaliveInterval = setInterval(() => {
+        window.idleScreenManager.resetIdleTimer();
+      }, 1000 * 10); // every 10 seconds
+    }
+  }
+  function stopIdleKeepalive() {
+    if (idleKeepaliveInterval) {
+      clearInterval(idleKeepaliveInterval);
+      idleKeepaliveInterval = null;
+    }
+  }
+
+  videoEl.addEventListener('play', startIdleKeepalive);
+  videoEl.addEventListener('pause', stopIdleKeepalive);
+  videoEl.addEventListener('ended', stopIdleKeepalive);
+
   modalEl.addEventListener("hidden.bs.modal", () => {
     videoEl.pause();
     setVideoSource("");
+    stopIdleKeepalive();
   });
 }
